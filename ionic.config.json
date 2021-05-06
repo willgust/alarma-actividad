@@ -1,0 +1,7 @@
+{
+  "name": "activityGuard",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

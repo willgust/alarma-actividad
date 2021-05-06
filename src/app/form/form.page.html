@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="usuario" (ngSubmit)="guardarDatos()">
+    <ion-item>
+      <ion-label>Nombre:</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-label color="danger" *ngIf="usuario.controls.nombre.errors?.required && (usuario.touched || usuario.dirty)">* El nombre es obligatorio </ion-label>
+    <ion-label color="danger" *ngIf="usuario.controls.nombre.errors?.minlength && (usuario.touched || usuario.dirty)">* El nombre tiene que tener al menos 4 caracteres.</ion-label>
+    <ion-item>
+      <ion-label>Email de contacto:</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <ion-label color="danger" *ngIf="usuario.controls.email.errors?.required && (usuario.touched || usuario.dirty)">* El email es obligatorio </ion-label>
+    <ion-label color="danger" *ngIf="usuario.controls.email.errors?.email && (usuario.touched || usuario.dirty)">* El email no es válido.</ion-label>
+    <ion-item>
+      <ion-label>Tiempo de activacion(min):</ion-label>
+      <ion-input type='number' formControlName="tiempoActivacion"></ion-input>
+    </ion-item>
+    <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.required && (usuario.touched || usuario.dirty)">* El tiempo de activacion es obligatorio </ion-label>
+    <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.minlength && (usuario.touched || usuario.dirty)">* El nombre tiene que tener al menos 4 caracteres.</ion-label>
+    <ion-item>
+      <ion-label>Hora Inicio</ion-label>
+      <ion-datetime formControlName="horaInicio" displayFormat="HH:mm"></ion-datetime>
+    </ion-item>
+    <ion-label color="danger" *ngIf="usuario.controls.horaInicio.errors?.required && (usuario.touched || usuario.dirty)">* La hora de inicio es obligatoria </ion-label>
+    <ion-item>
+      <ion-label>Hora Fin</ion-label>
+      <ion-datetime formControlName="horaFin" displayFormat="HH:mm"></ion-datetime>
+    </ion-item>
+    <ion-label color="danger" *ngIf="usuario.controls.horaFin.errors?.required && (usuario.touched || usuario.dirty)">* La hora de finalizacion es obligatoria </ion-label>
+    
+    <p class="ion-text-center">
+      <ion-button type="submit" [disabled]="!usuario.valid">Guardar</ion-button>
+    </p>
+    
+    <!-- <ion-card *ngFor = " let item of datosJSON">
+      <ion-item>inicio {{item.horaInicio}}</ion-item>
+      <ion-item>fin {{item.horaFin}}</ion-item>
+    </ion-card> -->
+
+    
+    
+ </form>
+ 
+ 
+ 
+</ion-content>
