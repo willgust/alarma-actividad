@@ -16,25 +16,30 @@ export class FormPage implements OnInit {
   horaInicio: Date;
   horaFin: Date;
 
-  datosJSON: any[] = [{}]
+  datosJSON: any[] = [{}];
 
   datosJSONEjemplo: any[] = [
     {
       "nombre": "carlos",
       "email" : "algo@gmail.com",
       "tiempoActivacion" : 123,
-      "horaInicio" : 19.30,
-      "horaFin" : 20.00
+      "horaInicio" : "19:30",
+      "horaFin" : "20:00"
     }];
 
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder) {
+
+    // this.guardarLocalStorage();
+    this.obtenerLocalStorage();
+   }
   
   usuario = this.fb.group({
-    nombre: ['jorge', [Validators.required, Validators.minLength(4)]],
-    email: ['sdf@g.com', [Validators.required, Validators.email]],
-    tiempoActivacion: ['123', [Validators.required, Validators.minLength(3)]],
-    horaInicio: ['2021-05-06T22:20:51.384+02:00', Validators.required],
-    horaFin: ['08:20', Validators.required],
+    nombre: ['', [Validators.required, Validators.minLength(4)]],
+    email: ['', [Validators.required, Validators.email]],
+    tiempoActivacion: ['', [Validators.required, Validators.minLength(3)]],
+    horaInicio: ['', Validators.required],
+    horaFin: ['', Validators.required],
   });
 
   
@@ -43,23 +48,43 @@ export class FormPage implements OnInit {
   }
 
   guardarDatos(){
+
+    this.datosJSON = [{}];
+
     console.log(this.usuario.value);
+    this.nombre=this.usuario.value["nombre"];
     this.email=this.usuario.value["email"];
+    this.tiempoActivacion=this.usuario.value["tiempoActivacion"];
+    this.horaInicio=this.usuario.value["horaInicio"];
+    this.horaFin=this.usuario.value["horaFin"];
     console.log(this.email);
-    console.log(this.usuario.value["horaInicio"]);
+    console.log("hora de inicio " + this.usuario.value["horaInicio"]);
     console.log(typeof this.usuario.value["horaFin"]);
     // console.log(this.usuario.);
     // this.nombre = this.usuario.
 
-    this.datosJSON.push({"nombre" : this.usuario.value["nombre"],
-                         "email" : this.usuario.value["email"],
-                         "tiempoActivacion" : this.usuario.value["tiempoActivacion"],
-                         "horaInicio" : this.usuario.value["horaInicio"],
-                         "horaFin" : this.usuario.value["horaFin"],                      
+    // this.datosJSON.push({"nombre" : this.usuario.value["nombre"],
+    //                      "email" : this.usuario.value["email"],
+    //                      "tiempoActivacion" : this.usuario.value["tiempoActivacion"],
+    //                      "horaInicio" : this.usuario.value["horaInicio"],
+    //                      "horaFin" : this.usuario.value["horaFin"],                      
+    //                     })
+    
+    this.datosJSON.push({"nombre" : this.nombre,
+                         "email" : this.email,
+                         "tiempoActivacion" : this.tiempoActivacion,
+                         "horaInicio" : this.horaInicio,
+                         "horaFin" : this.horaFin,                      
                         })
 
-    console.log("datos json " + this.datosJSONEjemplo[0].nombre);
 
+    console.log(this.datosJSON);
+    console.log(this.nombre);                   
+    console.log("datos json " + this.datosJSON[1].nombre);
+    
+
+    localStorage.clear();
+    localStorage.setItem("datosApp",JSON.stringify(this.datosJSON));
     // this.infoUsuario.push(this.usuario.value);
     // console.log(this.infoUsuario);
   }
@@ -67,5 +92,33 @@ export class FormPage implements OnInit {
   // transformData(date){
     
   // }
+  
+  guardarLocalStorage(){
+    
+    localStorage.clear();
+    let nombre: string = "carlos";
+    // let ejemplo = [
+    //   {
+    //     "nombre": "carlos",
+    //     "email" : "algo@gmail.com",
+    //     "tiempoActivacion" : 123,
+    //     "horaInicio" : "19:30",
+    //     "horaFin" : "20:00"
+    //   }];
 
+    let ejemplo = this.datosJSONEjemplo;
+
+      localStorage.setItem("nombre", nombre);
+      localStorage.setItem("persona",JSON.stringify(this.datosJSONEjemplo));
+  }
+
+  obtenerLocalStorage(){
+    let nombre = localStorage.getItem("nombre");
+    let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
+    // let ejemplo = localStorage.getItem("datosApp");
+
+    console.log("objeto recuperando " + ejemplo[1].nombre)
+    console.log("este es el objeto " + this.datosJSON);
+    console.log("este es el nombre " + this.datosJSON[0].nombre);
+  }
 }

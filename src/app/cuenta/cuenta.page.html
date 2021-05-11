@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Datos cuenta</ion-card-subtitle>
+      <!-- <ion-card-title>Datos</ion-card-title> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-label>correo: de momento nada</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>contraseña: ********</ion-label>
+      </ion-item>
+    </ion-card-content>
+    <p class="ion-text-right">
+      <ion-button type="submit" >Modificar</ion-button>
+    </p>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Configuracion App</ion-card-subtitle>
+      <!-- <ion-card-title>Datos</ion-card-title> -->
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Nombre: {{nombre}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email de contacto: {{email}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tiempo de activacion (en min): {{tiempoActivacion}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora de inicio: {{horaInicioModificada}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora de Fin: {{horaFinModificada}}</ion-label>
+      </ion-item>
+    </ion-card-content>
+    <p class="ion-text-right">
+      <ion-button type="submit" >Modificar</ion-button>
+    </p>
+  </ion-card>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Version Premium</ion-card-subtitle>
+    <!-- <ion-card-title>Datos</ion-card-title> -->
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-item>
+      <ion-label  type="text" name="inputname" value="datos a enviar" disabled>segundo correo de contacto: de momento nada</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label  type="text" name="inputname" value="datos a enviar" disabled>telefono al que mandar SMS</ion-label>
+    </ion-item>
+  </ion-card-content>
+  <p class="ion-text-right">
+    <ion-button type="submit" >Mejorar</ion-button>
+  </p>
+</ion-card>
+  
+</ion-content>

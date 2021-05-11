@@ -11,6 +11,9 @@ import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

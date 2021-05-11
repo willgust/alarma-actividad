@@ -42,7 +42,12 @@ export class HomePage {
     horaFin: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer) {}
+  private horaActual = new Date();
+
+  constructor(private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer) {
+
+    console.log("hora actual " + this.horaActual);
+  }
 
 
   gyrascope(){
