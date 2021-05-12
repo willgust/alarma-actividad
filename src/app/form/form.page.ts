@@ -31,7 +31,7 @@ export class FormPage implements OnInit {
   constructor(private fb: FormBuilder) {
 
     // this.guardarLocalStorage();
-    this.obtenerLocalStorage();
+    // this.obtenerLocalStorage();
    }
   
   usuario = this.fb.group({

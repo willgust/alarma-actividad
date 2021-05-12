@@ -6,6 +6,8 @@ import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -29,6 +31,20 @@ export class HomePage {
   public count: any=0;
   public reset: any=0;
 
+  nombre: string;
+  email: string;
+  tiempoActivacion: number;
+  tiempoActivacionCount: number;
+  horaInicio: string;
+  horaFin: string;
+  tiempoCorreo: number;
+  tiempoAhora: string;
+
+  horaInicioModificada: string;
+  horaFinModificada: string;
+  horaFinActual: string;
+  horaActualModificada: string;
+
   private subscription: any;
 
   text: string ="iniciar";
@@ -46,7 +62,49 @@ export class HomePage {
 
   constructor(private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer) {
 
+    // console.log("hora actual " + this.horaActual);
+    // this.obtenerLocalStorage();
+    // this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
+    // console.log("n1 de count total " + this.tiempoActivacionCount);
+    // this.tiempoCorreo = (this.tiempoActivacionCount+ 900);
+
+    // this.horaInicioModificada = this.horaInicio.substr(11,5);
+    // this.horaFinModificada = this.horaFin.substr(11,5);
+    // this.tiempoAhora = moment().format();;
+    // this.horaActualModificada = this.tiempoAhora.substr(11,5);
+    // console.log("hora de inicio modificada " + this.horaInicioModificada);
+    // console.log("hora de fin modificada " + this.horaFinModificada);
+    // console.log("mostrando tiempo de moment actual " + this.horaActualModificada);
+
+    // var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
+    // console.log(limitTime);
+    // console.log("inicio " + this.horaInicio);
+    // console.log("fin " + this.horaFin);
+    // console.log("actual " + this.horaActual);
+
+
+  }
+
+  ngOnInit() {
     console.log("hora actual " + this.horaActual);
+    this.obtenerLocalStorage();
+    this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
+    console.log("n1 de count total " + this.tiempoActivacionCount);
+    this.tiempoCorreo = (this.tiempoActivacionCount+ 900);
+
+    this.horaInicioModificada = this.horaInicio.substr(11,5);
+    this.horaFinModificada = this.horaFin.substr(11,5);
+    this.tiempoAhora = moment().format();;
+    this.horaActualModificada = this.tiempoAhora.substr(11,5);
+    console.log("hora de inicio modificada " + this.horaInicioModificada);
+    console.log("hora de fin modificada " + this.horaFinModificada);
+    console.log("mostrando tiempo de moment actual " + this.horaActualModificada);
+
+    var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
+    console.log(limitTime);
+    console.log("inicio " + this.horaInicio);
+    console.log("fin " + this.horaFin);
+    console.log("actual " + this.horaActual);
   }
 
 
@@ -80,6 +138,7 @@ export class HomePage {
 
   Accelerometer(){
 
+    
     var options = { frequency: 200 };
 
     this.deviceMotion.getCurrentAcceleration().then(
@@ -98,6 +157,18 @@ export class HomePage {
       this.accX=acceleration.x;
       this.accY=acceleration.y;
       this.accZ=acceleration.z;
+      // this.horaActual = new Date();
+      // var limitTime = this.DentroHorasLimite(this.horaInicio,this.horaFin,this.horaActual);
+      // console.log(limitTime);
+      this.tiempoAhora = moment().format();;
+      this.horaActualModificada = this.tiempoAhora.substr(11,5);
+      var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
+
+      // if(limitTime == false){
+      //   //el contador y todos los demas condicionales empiezan a funcionar
+      // }else{
+      //   //metemos un aviso de que en estas horas la aplicaciones esta configurada xa no funcionar y cortamos la ejecucion del subscribe
+      // }
 
       if(this. accX == this.oriX && this. accY == this.oriY && this. accZ == this.oriZ){
         this.controler = "algo";
@@ -106,6 +177,13 @@ export class HomePage {
         this.count = this.count +1;
 
         //aqui creamos un if donde una vez en count tenga el valor q queremos dispare la alarma. EN CONSTRUCCION
+        if(this.tiempoActivacionCount == this.count ){
+          //disparamos la alarma
+
+          if(this.tiempoCorreo == this.count){
+            //mandamos el correo
+          }
+        }
         
       }else{
 
@@ -128,6 +206,7 @@ export class HomePage {
 
   stopAccelerometer(){
     this.subscription.unsubscribe();
+    this.count = 0;
   }
   
   sendEmail(){
@@ -154,4 +233,45 @@ export class HomePage {
       this.text="Parar";
     }
   }
+
+  obtenerLocalStorage(){
+    let nombre = localStorage.getItem("nombre");
+    let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
+    // let ejemplo = localStorage.getItem("datosApp");
+
+    console.log("objeto recuperando " + ejemplo[1].nombre)
+
+    
+    this.nombre = ejemplo[1].nombre;
+    this.email = ejemplo[1].email;
+    this.tiempoActivacion = ejemplo[1].tiempoActivacion;
+    this.horaInicio = ejemplo[1].horaInicio;
+    this.horaFin = ejemplo[1].horaFin;
+    
+    console.log("nombre de susario " + this.nombre);
+    console.log("email de usuario " + this.email);
+    console.log("tiempo en min " + this.tiempoActivacion);
+    console.log("hora de inicio " + this.horaInicio);
+    console.log("hora de fin " + this.horaFin);
+  }
+
+  //da false si no esta dentro de las horas y true en caso de si estarlo
+  DentroHorasLimite (startTimeModificado ,  endTimeModificado ,  serverTimeModificado){
+    let  start  =  moment ( startTimeModificado ,  "H: mm" );
+    let  end  =  moment ( endTimeModificado ,  "H: mm" );
+    let  server  =  moment ( serverTimeModificado ,  "H: mm" );
+    if (end < start) {
+      return server >= start && server<= moment('23:59:59', "h:mm:ss") || server>= moment('0:00:00', "h:mm:ss") && server < end;
+  }
+  return server>= start && server< end
+
+  // DentroHorasLimite('22:30', '3:00', '23:50') //return true
+  // DentroHorasLimite('22:30', '3:00', '1:50') //return true
+  // DentroHorasLimite('22:30', '3:00', '4:50') //return false
+  }
+
+  soundAlarm(){
+    
+  }
+
 }
