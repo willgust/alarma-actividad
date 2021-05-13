@@ -10,6 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { LocalNotifications} from '@ionic-native/local-notifications/ngx'
+
+import { Media, MediaObject } from '@ionic-native/media/ngx';
 
 
 
@@ -22,6 +25,9 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
     Gyroscope,
     DeviceMotion,
     EmailComposer,
+    LocalNotifications,
+    Media,
+    
   ],
   bootstrap: [AppComponent],
 })

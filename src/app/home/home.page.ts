@@ -6,6 +6,8 @@ import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native
 import { DeviceMotion, DeviceMotionAccelerationData } from '@ionic-native/device-motion/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
 import * as moment from 'moment';
 
 @Component({
@@ -30,6 +32,8 @@ export class HomePage {
   public controler: any;
   public count: any=0;
   public reset: any=0;
+
+  audio: any
 
   nombre: string;
   email: string;
@@ -60,7 +64,7 @@ export class HomePage {
 
   private horaActual = new Date();
 
-  constructor(private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer) {
+  constructor(private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
 
     // console.log("hora actual " + this.horaActual);
     // this.obtenerLocalStorage();
@@ -86,6 +90,11 @@ export class HomePage {
   }
 
   ngOnInit() {
+
+    this.audio = new Audio();
+    this.audio.src = '../../assets/sound/002663916_prev.mp3';
+    this.audio.load();
+
     console.log("hora actual " + this.horaActual);
     this.obtenerLocalStorage();
     this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
@@ -105,6 +114,8 @@ export class HomePage {
     console.log("inicio " + this.horaInicio);
     console.log("fin " + this.horaFin);
     console.log("actual " + this.horaActual);
+
+    
   }
 
 
@@ -179,9 +190,12 @@ export class HomePage {
         //aqui creamos un if donde una vez en count tenga el valor q queremos dispare la alarma. EN CONSTRUCCION
         if(this.tiempoActivacionCount == this.count ){
           //disparamos la alarma
+          this.playAudio()
 
           if(this.tiempoCorreo == this.count){
+            this.stopAudio();
             //mandamos el correo
+            
           }
         }
         
@@ -194,6 +208,7 @@ export class HomePage {
 
         this.reset = this.reset +1;
         this.count = 0;
+        this.stopAudio();
 
 
 
@@ -270,8 +285,13 @@ export class HomePage {
   // DentroHorasLimite('22:30', '3:00', '4:50') //return false
   }
 
-  soundAlarm(){
-    
+  playAudio() { 
+    this.audio.play(); 
+    this.audio.loop = true; 
+  }
+
+  stopAudio() { 
+    this.audio.pause();
   }
 
 }
