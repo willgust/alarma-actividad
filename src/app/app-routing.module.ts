@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'form',
     pathMatch: 'full'
   },
   {
@@ -36,3 +36,41 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+
+// const routes: Routes = [
+//   {
+//     path: 'home',
+//     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+//   },
+//   {
+//     path: '',
+//     redirectTo: 'home',
+//     pathMatch: 'full'
+//   },
+//   {
+//     path: 'form',
+//     loadChildren: () => import('./form/form.module').then( m => m.FormPageModule)
+//   },
+//   {
+//     path: 'cuenta',
+//     loadChildren: () => import('./cuenta/cuenta.module').then( m => m.CuentaPageModule)
+//   },
+//   {
+//     path: 'modificar-datos',
+//     loadChildren: () => import('./modificar-datos/modificar-datos.module').then( m => m.ModificarDatosPageModule)
+//   },
+//   {
+//     path: 'login',
+//     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+//   },
+// ];
+
+// @NgModule({
+//   imports: [
+//     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+//   ],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }

@@ -36,11 +36,13 @@
     <ion-label color="danger" *ngIf="usuario.controls.horaFin.errors?.required && (usuario.touched || usuario.dirty)">* La hora de finalizacion es obligatoria </ion-label>
     
     <p class="ion-text-center">
-      <ion-button type="submit" >Cancelar</ion-button>
-      <ion-button type="submit" [disabled]="!usuario.valid">Modificar</ion-button>
+      
+      <ion-button type="submit" [disabled]="!usuario.valid" routerLink="/home">Modificar</ion-button>
     </p>
     
 
 
- </form>
+  </form>
+  <ion-button class="ion-text-center" type="submit" routerLink="/home">Cancelar</ion-button>
+  
 </ion-content>

@@ -50,6 +50,10 @@
         <ion-item> 
           <ion-label>numero de contadores </ion-label>
           <ion-input type="text" [(ngModel)]="tiempoActivacionCount"></ion-input>
+        </ion-item>
+        <ion-item> 
+          <ion-label>tiempoActivacion </ion-label>
+          <ion-input type="text" [(ngModel)]="tiempoActivacion"></ion-input>
         </ion-item> 
         <!-- <button ion-button (click)="Accelerometer()" full>click</button> -->
         <ion-button expad="block" (click)="Accelerometer()">{{text}} app</ion-button>
@@ -61,6 +65,8 @@
 
         <ion-button expad="block" (click)="playAudio()">sonido</ion-button>
         <ion-button expad="block" (click)="stopAudio()">sonido OFF</ion-button>
+
+        <ion-button expad="block" (click)="stopAccelerometer()" routerLink="/cuenta">cuenta</ion-button>
         
 
         

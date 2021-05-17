@@ -36,7 +36,7 @@
     <ion-label color="danger" *ngIf="usuario.controls.horaFin.errors?.required && (usuario.touched || usuario.dirty)">* La hora de finalizacion es obligatoria </ion-label>
     
     <p class="ion-text-center">
-      <ion-button type="submit" [disabled]="!usuario.valid">Guardar</ion-button>
+      <ion-button type="submit" [disabled]="!usuario.valid" routerLink="/home" >Guardar</ion-button>
     </p>
     
     <!-- <ion-card *ngFor = " let item of datosJSON">
