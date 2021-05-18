@@ -102,29 +102,29 @@ export class HomePage {
     this.audio.src = '../../assets/sound/002663916_prev.mp3';
     this.audio.load();
 
-    console.log("hora actual " + this.horaActual);
-    this.obtenerLocalStorage();
-    console.log("tiempo de activacion " + this.tiempoActivacion);
-    this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
-    console.log("n1 de count total " + this.tiempoActivacionCount);
-    this.tiempoCorreo = (this.tiempoActivacionCount+ 900);
+    // console.log("hora actual " + this.horaActual);
+    // // this.obtenerLocalStorage();
+    // console.log("tiempo de activacion " + this.tiempoActivacion);
+    // this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
+    // console.log("n1 de count total " + this.tiempoActivacionCount);
+    // this.tiempoCorreo = (this.tiempoActivacionCount+ 900);
 
-    this.horaInicioModificada = this.horaInicio.substr(11,5);
-    this.horaFinModificada = this.horaFin.substr(11,5);
-    this.tiempoAhora = moment().format();;
-    this.horaActualModificada = this.tiempoAhora.substr(11,5);
-    console.log("hora de inicio modificada " + this.horaInicioModificada);
-    console.log("hora de fin modificada " + this.horaFinModificada);
-    console.log("mostrando tiempo de moment actual " + this.horaActualModificada);
+    // this.horaInicioModificada = this.horaInicio.substr(11,5);
+    // this.horaFinModificada = this.horaFin.substr(11,5);
+    // this.tiempoAhora = moment().format();;
+    // this.horaActualModificada = this.tiempoAhora.substr(11,5);
+    // console.log("hora de inicio modificada " + this.horaInicioModificada);
+    // console.log("hora de fin modificada " + this.horaFinModificada);
+    // console.log("mostrando tiempo de moment actual " + this.horaActualModificada);
 
-    console.log("tiempo de activacion " + this.tiempoActivacion);
-    console.log("tiempo de contador xa activar " + this.tiempoActivacionCount);
+    // console.log("tiempo de activacion " + this.tiempoActivacion);
+    // console.log("tiempo de contador xa activar " + this.tiempoActivacionCount);
 
-    var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
-    console.log(limitTime);
-    console.log("inicio " + this.horaInicio);
-    console.log("fin " + this.horaFin);
-    console.log("actual " + this.horaActual);
+    // var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
+    // console.log(limitTime);
+    // console.log("inicio " + this.horaInicio);
+    // console.log("fin " + this.horaFin);
+    // console.log("actual " + this.horaActual);
     
     
   }

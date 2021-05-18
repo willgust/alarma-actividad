@@ -6,6 +6,9 @@
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  --ion-background-color:#darksalmon;
+
+
 }
 
 #container strong {
@@ -29,4 +32,32 @@
 .ripple-parent {
   position: relative;
   overflow: hidden;
+}
+
+#app2{
+  background: rgb(211, 211, 211);
+  color:rgb(211, 211, 211) ;
+}
+
+.app{ //class="app"
+  position: absolute;
+  background-color: #262B32 !important;
+  color: darksalmon;
+
+
+}
+
+.app3{
+  color:darkgrey;
+  background:rgba(228, 107, 8, 0.993);
+}
+
+.custom-icon {
+  
+  color : black;
+}
+
+.custom-Text {
+  
+  color : black;
 }

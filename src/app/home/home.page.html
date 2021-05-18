@@ -1,6 +1,6 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
+<ion-header [translucent]="true" >
+  <ion-toolbar color="secondary">
+    <ion-title class="custom-Text">
       GUARD ALARM
     </ion-title>
   </ion-toolbar>
@@ -67,7 +67,22 @@
         <ion-button expad="block" (click)="stopAudio()">sonido OFF</ion-button>
 
         <ion-button expad="block" (click)="stopAccelerometer()" routerLink="/cuenta">cuenta</ion-button>
-        
-
-        
+      
   </ion-content>
+
+  <ion-footer class="ion-no-border" >
+    <ion-toolbar >
+      <ion-tabs >
+        <ion-tab-bar slot="bottom" color="secondary">
+          <ion-tab-button routerLink="/home" class="custom-icon">
+            <ion-icon name="home"></ion-icon>
+            <ion-label>Home</ion-label>
+          </ion-tab-button>
+          <ion-tab-button routerLink="/cuenta" class="custom-icon">
+            <ion-icon name="person-circle-outline" ></ion-icon>
+            <ion-label>Cuenta</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-toolbar>
+  </ion-footer>

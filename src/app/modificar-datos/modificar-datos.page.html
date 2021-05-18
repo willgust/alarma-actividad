@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>modificar Datos</ion-title>
+  <ion-toolbar color="secondary">
+    <ion-title class="custom-Text">modificar Datos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -37,12 +37,12 @@
     
     <p class="ion-text-center">
       
-      <ion-button type="submit" [disabled]="!usuario.valid" routerLink="/home">Modificar</ion-button>
+      <ion-button expand="block" type="submit" [disabled]="!usuario.valid" routerLink="/home">Modificar</ion-button>
     </p>
     
 
 
   </form>
-  <ion-button class="ion-text-center" type="submit" routerLink="/home">Cancelar</ion-button>
+  <ion-button expand="block" class="ion-text-center" type="submit" routerLink="/home">Cancelar</ion-button>
   
 </ion-content>
