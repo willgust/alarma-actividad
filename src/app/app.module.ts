@@ -13,6 +13,7 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { LocalNotifications} from '@ionic-native/local-notifications/ngx'
 
 import { Media, MediaObject } from '@ionic-native/media/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 
 
@@ -27,6 +28,7 @@ import { Media, MediaObject } from '@ionic-native/media/ngx';
     EmailComposer,
     LocalNotifications,
     Media,
+    BackgroundMode,
     
   ],
   bootstrap: [AppComponent],

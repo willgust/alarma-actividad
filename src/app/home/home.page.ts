@@ -11,6 +11,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import * as moment from 'moment';
 
 import { ToastController } from '@ionic/angular';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @Component({
   selector: 'app-home',
@@ -66,7 +67,7 @@ export class HomePage {
 
   private horaActual = new Date();
 
-  constructor(private _toastContrl: ToastController , private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
+  constructor(private backgroundMode: BackgroundMode , private _toastContrl: ToastController , private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
 
     // console.log("hora actual " + this.horaActual);
     // this.obtenerLocalStorage();
@@ -92,7 +93,7 @@ export class HomePage {
   }
   ionViewWillEnter (){
     
-
+    // this.backgroundMode.enable();
     this.obtenerLocalStorage();
     
   }
@@ -101,6 +102,8 @@ export class HomePage {
     this.audio = new Audio();
     this.audio.src = '../../assets/sound/002663916_prev.mp3';
     this.audio.load();
+
+    
 
     // console.log("hora actual " + this.horaActual);
     // // this.obtenerLocalStorage();
