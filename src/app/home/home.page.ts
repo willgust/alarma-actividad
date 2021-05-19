@@ -12,6 +12,12 @@ import * as moment from 'moment';
 
 import { ToastController } from '@ionic/angular';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { ForegroundService } from '@ionic-native/foreground-service/ngx';
+
+import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
+
+
+
 
 @Component({
   selector: 'app-home',
@@ -67,7 +73,7 @@ export class HomePage {
 
   private horaActual = new Date();
 
-  constructor(private backgroundMode: BackgroundMode , private _toastContrl: ToastController , private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
+  constructor(public foregroundService: ForegroundService , private backgroundMode: BackgroundMode , private _toastContrl: ToastController , private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
 
     // console.log("hora actual " + this.horaActual);
     // this.obtenerLocalStorage();
@@ -88,20 +94,22 @@ export class HomePage {
     // console.log("inicio " + this.horaInicio);
     // console.log("fin " + this.horaFin);
     // console.log("actual " + this.horaActual);
-
-
+   
   }
   ionViewWillEnter (){
-    
-    // this.backgroundMode.enable();
+    this.startService();
+    this.backgroundMode.enable();
     this.obtenerLocalStorage();
+    
     
   }
   ngOnInit() {
+    
 
     this.audio = new Audio();
     this.audio.src = '../../assets/sound/002663916_prev.mp3';
     this.audio.load();
+    
 
     
 
@@ -131,6 +139,16 @@ export class HomePage {
     
     
   }
+
+  startService() {
+    // Notification importance is optional, the default is 1 - Low (no sound or vibration)
+    this.foregroundService.start('Guard Alarm', 'Background Service');
+   }
+
+  stopService() {
+    // Disable the foreground service
+    this.foregroundService.stop();
+   }
 
 
   gyrascope(){
@@ -184,6 +202,7 @@ export class HomePage {
     );
     
     if(limitTime == false){
+      this.TimeToast("guard alarm ha sido activado");
       // Watch device acceleration
       this.subscription = this.deviceMotion.watchAcceleration(options).subscribe((acceleration: DeviceMotionAccelerationData) => {
       console.log(acceleration);
@@ -208,15 +227,18 @@ export class HomePage {
           //aqui creamos un if donde una vez en count tenga el valor q queremos dispare la alarma. 
           if(this.tiempoActivacionCount == this.count ){
             //disparamos la alarma
-            this.playAudio()
-            
-            //cuando el tiempo extra se haya cumplido mandamos el correo y cortamos la alarma
-            if(this.tiempoCorreo == this.count){
+            this.playAudio();
+          }
+                      
+          //cuando el tiempo extra se haya cumplido mandamos el correo y cortamos la alarma y el programa
+          if(this.tiempoCorreo == this.count){
               this.stopAudio();
               //mandamos el correo
+              this.sendMailJS();
+              this.stopAccelerometer();
               
-            }
           }
+          
         //al moverse el movil reseteamos el contador y si la alarma estuviera sonado la cortamos  
         }else{
   
@@ -232,72 +254,17 @@ export class HomePage {
         }
           
       }else{
-        //metemos un aviso de que en estas horas la aplicaciones esta configurada xa no funcionar y cortamos la ejecucion del subscribe(podriamos pausar la ejecucion y continuar cuando sea la hora, pero no me gusta la idea)
-           this.TimeToast();
-           this.stopAccelerometer();
+        //metemos un aviso de que en estas horas la aplicaciones esta configurada xa no funcionar y ponemos el count a 0
+           this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
+          //  this.stopAccelerometer();
+          this.count = 0;
       }
     
     });
     }else{
-      this.TimeToast();
+      this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
     }
-    // // Watch device acceleration
-    // this.subscription = this.deviceMotion.watchAcceleration(options).subscribe((acceleration: DeviceMotionAccelerationData) => {
-    //   console.log(acceleration);
-    //   this.accX=acceleration.x;
-    //   this.accY=acceleration.y;
-    //   this.accZ=acceleration.z;
-    //   // this.horaActual = new Date();
-    //   // var limitTime = this.DentroHorasLimite(this.horaInicio,this.horaFin,this.horaActual);
-    //   // console.log(limitTime);
-    //   this.tiempoAhora = moment().format();;
-    //   this.horaActualModificada = this.tiempoAhora.substr(11,5);
-    //   var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
-
-    //   // if(limitTime == false){
-    //   //   //el contador y todos los demas condicionales empiezan a funcionar
-    //   // }else{
-    //   //   //metemos un aviso de que en estas horas la aplicaciones esta configurada xa no funcionar y cortamos la ejecucion del subscribe
-    //        //TimeToast();
-    //        //stopAccelerometer();
-    //   // }
-
-    //   if(this. accX == this.oriX && this. accY == this.oriY && this. accZ == this.oriZ){
-    //     this.controler = "algo";
-    //     console.log(this.count);
-
-    //     this.count = this.count +1;
-
-    //     //aqui creamos un if donde una vez en count tenga el valor q queremos dispare la alarma. EN CONSTRUCCION
-    //     if(this.tiempoActivacionCount == this.count ){
-    //       //disparamos la alarma
-    //       this.playAudio()
-
-    //       if(this.tiempoCorreo == this.count){
-    //         this.stopAudio();
-    //         //mandamos el correo
-            
-    //       }
-    //     }
-        
-    //   }else{
-
-    //     this.oriX = this.accX;
-    //     this.oriY = this.accY;
-    //     this.oriZ = this.accZ;
-    //     console.log(this.reset);
-
-    //     this.reset = this.reset +1;
-    //     this.count = 0;
-    //     this.stopAudio();
-
-
-
-    //   }
-
-    
-    // });
-    
+      
   }
 
   stopAccelerometer(){
@@ -305,22 +272,6 @@ export class HomePage {
     this.count = 0;
   }
   
-  sendEmail(){
-    let email = {
-      to: 'willgustarson@gmail.com',
-      // cc: 'erika@mustermann.de',
-      // bcc: ['john@doe.com', 'jane@doe.com'],
-      // attachments: [
-      // ],
-      subject: 'pruebas de envio',
-      body: 'el tiempo paso y el correo de actividad se envio',
-      isHtml: true
-    };
-
-    // Enviar un mensaje de texto utilizando las opciones por defecto
-    this.emailComposer.open(email);
-  }
-
   change_Buttom(){
     this.changebuttom = !this.changebuttom;
     if(this.changebuttom == true){
@@ -351,18 +302,6 @@ export class HomePage {
     console.log("hora de fin " + this.horaFin);
   }
 
-  obtenerLocalStoragePromise(){
-    let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
-    const GetEjemplo = () => {
-      return new Promise((resolve, reject) =>{
-        setTimeout(() => {
-          resolve(ejemplo);
-        }, 1500);
-      })
-    }
-
-  }
-
   //da false si no esta dentro de las horas y true en caso de si estarlo
   DentroHorasLimite (startTimeModificado ,  endTimeModificado ,  serverTimeModificado){
     let  start  =  moment ( startTimeModificado ,  "H: mm" );
@@ -387,13 +326,27 @@ export class HomePage {
     this.audio.pause();
   }
 
-  async TimeToast() {
+  async TimeToast(string) {
     const toast = await this._toastContrl.create({
-      message: 'En este horario no se puede activar la alarma, revise su configuración.',
+      message: string,
       duration: 2000,
       position : 'bottom'
     });
     toast.present();
   }
 
+  sendMailJS(){
+    var tempParams = {
+      from_name : "Guard Alarm",
+      to_name : this.nombre,
+      message : "ha pasado el tiempo de actividad marcado de " + this.tiempoActivacion + " minutos" ,
+      user_email : this.email
+    };
+    emailjs.send('service_kcju8h4', 'template_9xzhqh7', tempParams , 'user_uQL2GaHT3dQd2acMvxJBB' )
+    .then(function(res) {
+      console.log("exito", res.status);
+    })
+  }
+
+  
 }

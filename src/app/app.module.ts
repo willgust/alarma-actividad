@@ -14,6 +14,7 @@ import { LocalNotifications} from '@ionic-native/local-notifications/ngx'
 
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { ForegroundService } from '@ionic-native/foreground-service/ngx';
 
 
 
@@ -29,6 +30,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     LocalNotifications,
     Media,
     BackgroundMode,
+    ForegroundService
     
   ],
   bootstrap: [AppComponent],

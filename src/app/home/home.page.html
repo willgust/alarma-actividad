@@ -1,3 +1,10 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script type="text/javascript">
+(function() {
+emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
+})();
+</script>
+
 <ion-header [translucent]="true" >
   <ion-toolbar color="secondary">
     <ion-title class="custom-Text">
@@ -55,6 +62,10 @@
           <ion-label>tiempoActivacion </ion-label>
           <ion-input type="text" [(ngModel)]="tiempoActivacion"></ion-input>
         </ion-item> 
+        <ion-item> 
+          <ion-label>tiempocorreo </ion-label>
+          <ion-input type="text" [(ngModel)]="tiempoCorreo"></ion-input>
+        </ion-item> 
         <!-- <button ion-button (click)="Accelerometer()" full>click</button> -->
         <ion-button expad="block" (click)="Accelerometer()">{{text}} app</ion-button>
         <ion-button expad="block" (click)="stopAccelerometer()">Parar app</ion-button>
@@ -67,6 +78,8 @@
         <ion-button expad="block" (click)="stopAudio()">sonido OFF</ion-button>
 
         <ion-button expad="block" (click)="stopAccelerometer()" routerLink="/cuenta">cuenta</ion-button>
+
+        <ion-button expad="block" (click)="sendMailJS()">mandar correo</ion-button>
       
   </ion-content>
 
