@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form',
@@ -28,10 +29,9 @@ export class FormPage implements OnInit {
     }];
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder , private navCtrl: NavController) {
 
-    // this.guardarLocalStorage();
-    // this.obtenerLocalStorage();
+    
    }
   
   usuario = this.fb.group({
@@ -43,8 +43,24 @@ export class FormPage implements OnInit {
   });
 
   
+  ionViewWillEnter (){
+    
+    this.obtenerLocalStorage();
+     
+  }
 
   ngOnInit() {
+    console.log( "estoy viendo cuando cargas 1 " + this.tiempoActivacion);
+  }
+
+  ionViewDidEnter (){
+    console.log( "estoy viendo cuando cargas 2 " + this.tiempoActivacion);
+    if(this.nombre == null){
+      
+    }else{
+      this.navegateHome();
+    }
+     
   }
 
   guardarDatos(){
@@ -60,16 +76,7 @@ export class FormPage implements OnInit {
     console.log(this.email);
     console.log("hora de inicio " + this.usuario.value["horaInicio"]);
     console.log(typeof this.usuario.value["horaFin"]);
-    // console.log(this.usuario.);
-    // this.nombre = this.usuario.
 
-    // this.datosJSON.push({"nombre" : this.usuario.value["nombre"],
-    //                      "email" : this.usuario.value["email"],
-    //                      "tiempoActivacion" : this.usuario.value["tiempoActivacion"],
-    //                      "horaInicio" : this.usuario.value["horaInicio"],
-    //                      "horaFin" : this.usuario.value["horaFin"],                      
-    //                     })
-    
     this.datosJSON.push({"nombre" : this.nombre,
                          "email" : this.email,
                          "tiempoActivacion" : this.tiempoActivacion,
@@ -93,24 +100,25 @@ export class FormPage implements OnInit {
     
   // }
   
-  guardarLocalStorage(){
+  // guardarLocalStorage(){
     
-    localStorage.clear();
-    let nombre: string = "carlos";
-    // let ejemplo = [
-    //   {
-    //     "nombre": "carlos",
-    //     "email" : "algo@gmail.com",
-    //     "tiempoActivacion" : 123,
-    //     "horaInicio" : "19:30",
-    //     "horaFin" : "20:00"
-    //   }];
+  //   localStorage.clear();
+  //   let nombre: string = "carlos";
+  //   // let ejemplo = [
+  //   //   {
+  //   //     "nombre": "carlos",
+  //   //     "email" : "algo@gmail.com",
+  //   //     "tiempoActivacion" : 123,
+  //   //     "horaInicio" : "19:30",
+  //   //     "horaFin" : "20:00"
+  //   //   }];
 
-    let ejemplo = this.datosJSONEjemplo;
+  //   let ejemplo = this.datosJSONEjemplo;
 
-      localStorage.setItem("nombre", nombre);
-      localStorage.setItem("persona",JSON.stringify(this.datosJSONEjemplo));
-  }
+  //     localStorage.setItem("nombre", nombre);
+  //     localStorage.setItem("persona",JSON.stringify(this.datosJSONEjemplo));
+  // }
+
 
   obtenerLocalStorage(){
     let nombre = localStorage.getItem("nombre");
@@ -118,7 +126,22 @@ export class FormPage implements OnInit {
     // let ejemplo = localStorage.getItem("datosApp");
 
     console.log("objeto recuperando " + ejemplo[1].nombre)
-    console.log("este es el objeto " + this.datosJSON);
-    console.log("este es el nombre " + this.datosJSON[0].nombre);
+
+    
+    this.nombre = ejemplo[1].nombre;
+    this.email = ejemplo[1].email;
+    this.tiempoActivacion = ejemplo[1].tiempoActivacion;
+    this.horaInicio = ejemplo[1].horaInicio;
+    this.horaFin = ejemplo[1].horaFin;
+    
+    console.log("nombre de susario " + this.nombre);
+    console.log("email de usuario " + this.email);
+    console.log("tiempo en min " + this.tiempoActivacion);
+    console.log("hora de inicio " + this.horaInicio);
+    console.log("hora de fin " + this.horaFin);
+  }
+
+  navegateHome(){
+    this.navCtrl.navigateForward('/home');
   }
 }

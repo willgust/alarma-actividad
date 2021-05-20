@@ -270,6 +270,7 @@ export class HomePage {
   stopAccelerometer(){
     this.subscription.unsubscribe();
     this.count = 0;
+    this.TimeToast("guard alarm se ha detenido");
   }
   
   change_Buttom(){
