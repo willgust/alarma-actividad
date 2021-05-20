@@ -361,14 +361,14 @@ export class HomePage {
   }
   
   buttonOn() { 
-    // this function is called;
-    alert("lo acabas de encender");
+    // encienda la llamada
+    // alert("lo acabas de encender");
     this.Accelerometer();
 }
 
   buttonOff() {
-    // how to call this function when toggle button gets off?
-   alert("lo acabas de apagar");
+    // apaga la llamada
+  //  alert("lo acabas de apagar");
    this.stopAccelerometer();
 }
 

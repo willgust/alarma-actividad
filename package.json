@@ -31,6 +31,7 @@
     "@ionic/angular": "^5.5.2",
     "cordova-android": "9.1.0",
     "emailjs-com": "^2.6.4",
+    "gl-ionic-background-video": "0.0.5",
     "moment": "^2.29.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

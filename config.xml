@@ -18,6 +18,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
+    <preference name="AllowInlineMediaPlayBack" value="true" />
     <platform name="android">
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />

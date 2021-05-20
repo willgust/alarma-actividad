@@ -1,19 +1,20 @@
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 <script type="text/javascript">
 (function() {
 emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
 })();
-</script>
+</script> -->
 
 <ion-header [translucent]="true" >
   <ion-toolbar color="secondary">
     <ion-title class="custom-Text">
-      GUARD ALARM
+      Activity Guard
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" >
+<ion-content [fullscreen]="true" force-overscroll="false">
+  <gl-background-video src="assets/video/fondo.mp4" mute="false"></gl-background-video>
   <!-- <ion-item> 
     <ion-label>X orientation</ion-label>
   <ion-input type="text" [(ngModel)]="xOrient"></ion-input>
@@ -33,7 +34,7 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
 
       <button ion-button (click)="gyrascope()" full>click</button> -->
 
-      <ion-item> 
+      <!-- <ion-item> 
           <ion-label>Acceleration X</ion-label>
           <ion-input type="text" [(ngModel)]="accX"></ion-input>
         </ion-item>
@@ -65,13 +66,13 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
         <ion-item> 
           <ion-label>tiempocorreo </ion-label>
           <ion-input type="text" [(ngModel)]="tiempoCorreo"></ion-input>
-        </ion-item> 
-        <!-- <button ion-button (click)="Accelerometer()" full>click</button> -->
-        <ion-button expad="block" (click)="Accelerometer()">{{text}} app</ion-button>
+        </ion-item>  -->
+        
+        <!-- <ion-button expad="block" (click)="Accelerometer()">{{text}} app</ion-button>
         <ion-button expad="block" (click)="stopAccelerometer()">Parar app</ion-button>
-        <!-- <ion-button expad="block" (click)="Accelerometer()" (click)="change_Buttom()">{{text}} app</ion-button> -->
+        
         <div *ngIf = "changebuttom == true"></div>
-        <!-- <button ion-button full  (click)="sendEmail()" full>Enviar</button> -->
+        
 
 
         <ion-button expad="block" (click)="playAudio()">sonido</ion-button>
@@ -79,15 +80,45 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
 
         <ion-button expad="block" (click)="stopAccelerometer()" routerLink="/cuenta">cuenta</ion-button>
 
-        <ion-button expad="block" (click)="sendMailJS()">mandar correo</ion-button>
+        <ion-button expad="block" (click)="sendMailJS()">mandar correo</ion-button> -->
 
-        <div >
+        <div class="page-centered-elemnet">
           <div class="content"> 
-            <h4>guard alarm se activara {{tiempoActivacion}} min despues de no tener actividad una vez activada la app</h4>
+            <ion-item> 
+              <ion-label>Count</ion-label>
+              <ion-input type="text" [(ngModel)]="count"></ion-input>
+            </ion-item>
+            <ion-item> 
+              <ion-label>Reset</ion-label>
+              <ion-input type="text" [(ngModel)]="reset"></ion-input>
+            </ion-item> 
+            <ion-item> 
+              <ion-label>numero de contadores </ion-label>
+              <ion-input type="text" [(ngModel)]="tiempoActivacionCount"></ion-input>
+            </ion-item>
+            <ion-item> 
+              <ion-label>tiempoActivacion </ion-label>
+              <ion-input type="text" [(ngModel)]="tiempoActivacion"></ion-input>
+            </ion-item> 
+            <ion-item> 
+              <ion-label>tiempocorreo </ion-label>
+              <ion-input type="text" [(ngModel)]="tiempoCorreo"></ion-input>
+            </ion-item> 
+            <h4 style="color:aliceblue">Activity Guard se activara {{tiempoActivacion}} min despues de no tener actividad una vez activada la app</h4>
             <div class="buttons-container">
               <ion-button fill="clear" color="ligth" size="large">
                 <ion-toggle [(ngModel)]="status" color="secondary" class="width-large" (ionChange)="onChange()"></ion-toggle>
               </ion-button>
+ 
+              <ion-button expad="block" (click)="Accelerometer()">{{text}} app</ion-button>
+              <ion-button expad="block" (click)="stopAccelerometer()">Parar app</ion-button>
+
+              <ion-button expad="block" (click)="playAudio()">sonido</ion-button>
+              <ion-button expad="block" (click)="stopAudio()">sonido OFF</ion-button>
+
+              <ion-button expad="block" (click)="stopAccelerometer()" routerLink="/cuenta">cuenta</ion-button>
+
+              <ion-button expad="block" (click)="sendMailJS()">mandar correo</ion-button>
             </div>
           </div>
         </div>
