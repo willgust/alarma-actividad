@@ -13,7 +13,7 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
   <!-- <ion-item> 
     <ion-label>X orientation</ion-label>
   <ion-input type="text" [(ngModel)]="xOrient"></ion-input>
@@ -80,8 +80,31 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
         <ion-button expad="block" (click)="stopAccelerometer()" routerLink="/cuenta">cuenta</ion-button>
 
         <ion-button expad="block" (click)="sendMailJS()">mandar correo</ion-button>
+
+        <div >
+          <div class="content"> 
+            <h4>guard alarm se activara {{tiempoActivacion}} min despues de no tener actividad una vez activada la app</h4>
+            <div class="buttons-container">
+              <ion-button fill="clear" color="ligth" size="large">
+                <ion-toggle [(ngModel)]="status" color="secondary" class="width-large" (ionChange)="onChange()"></ion-toggle>
+              </ion-button>
+            </div>
+          </div>
+        </div>
       
-  </ion-content>
+</ion-content>
+  <!-- <ion-card-content>
+    <div class="page-centered-elemnet">
+      <div class="content"> 
+        <h4>guard alarm se activara 100 min despues de no tener actividad una vez activada la app</h4>
+        <div class="buttons-container">
+          <ion-button fill="clear" color="ligth" size="large">
+            <ion-toggle color="secondary" class="width-large" (ionChange)="onChange()"></ion-toggle>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ion-card-content>  -->
 
   <ion-footer class="ion-no-border" >
     <ion-toolbar >

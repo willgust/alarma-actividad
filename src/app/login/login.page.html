@@ -4,16 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item>
-    <ion-label>Email de contacto:</ion-label>
-
-  </ion-item>
-  <ion-item> 
-    <ion-label>numero de contadores </ion-label>
-    <ion-input type="text" [(ngModel)]="tiempoActivacionCount"></ion-input>
-  </ion-item>
+<ion-content force-overscroll="false">
   
+
+  <div class="page-centered-elemnet">
+    <div class="content"> 
+      <h4>guard alarm se activara 100 min despues de no tener actividad una vez activada la app</h4>
+      <div class="buttons-container">
+        <ion-button fill="clear" color="ligth" size="large">
+          <ion-toggle [(ngModel)]="status" color="secondary" class="width-large" (ionChange)="onChange()"></ion-toggle>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
 </ion-content>
 <!-- <ion-tabs>
   <ion-tab-bar slot="bottom">

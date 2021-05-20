@@ -61,3 +61,76 @@
   
   color : black;
 }
+
+.page-centered-elemnet{
+  position:absolute;
+  left:0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-header{
+  text-align: center;
+  font-size: 55px;
+  color: black;
+}
+
+.iconSize{
+  font-size: 60px;
+}
+
+.content{
+  text-align: center;
+  color: black;
+}
+
+.buttons-container{
+  margin-top: 30px;
+}
+
+
+
+ion-toggle[aria-checked="false"]{
+  position: relative;
+  width: 70px;
+  
+ &::before {
+   position: absolute;
+   content: "Apagado";
+   font-size: 10px;
+   line-height: 31px;
+   top: 0;
+   left: 40px;
+   color: black;
+ }
+ &::after {
+   position: absolute;
+   content: "";
+ }
+}
+ion-toggle[aria-checked="true"]{
+ position: relative;
+ width: 70px;
+ &::before {
+   position: absolute;
+   content: "";
+ }
+&::after {
+  position: absolute;
+  content: "Encendido";
+  font-size: 10px;
+  line-height: 31px;
+  top: 0;
+  left: 3px;
+  color: black;
+}
+}
+  
+.width-large {
+  width: 100px;
+  zoom: 3;
+}

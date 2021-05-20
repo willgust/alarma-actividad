@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class LoginPage implements OnInit {
 
-  
+  status=false;
   
 
   constructor() { }
@@ -21,6 +21,24 @@ export class LoginPage implements OnInit {
     
   }
 
+  onChange(){
+    if(this.status){
+      this.buttonOn();
+    }
+    else{
+      this.buttonOff()
+    }
+  }
+  
+  buttonOn() { 
+      // this function is called;
+      alert("lo acabas de encender");
+  }
+  
+  buttonOff() {
+     // how to call this function when toggle button gets off?
+     alert("lo acabas de apagar");
+  }
   
 
 }

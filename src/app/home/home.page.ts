@@ -73,6 +73,8 @@ export class HomePage {
 
   private horaActual = new Date();
 
+  status=false;
+
   constructor(public foregroundService: ForegroundService , private backgroundMode: BackgroundMode , private _toastContrl: ToastController , private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
 
     // console.log("hora actual " + this.horaActual);
@@ -348,6 +350,27 @@ export class HomePage {
       console.log("exito", res.status);
     })
   }
+
+  onChange(){
+    if(this.status){
+      this.buttonOn();
+    }
+    else{
+      this.buttonOff()
+    }
+  }
+  
+  buttonOn() { 
+    // this function is called;
+    alert("lo acabas de encender");
+    this.Accelerometer();
+}
+
+  buttonOff() {
+    // how to call this function when toggle button gets off?
+   alert("lo acabas de apagar");
+   this.stopAccelerometer();
+}
 
   
 }
