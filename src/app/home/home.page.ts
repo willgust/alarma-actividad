@@ -184,11 +184,12 @@ export class HomePage {
 
       });
     } else {
-      this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
+      // this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
       // this.cambiartoggle();
       console.log("estoy mirando el valor de status antes de llamar a la funcion " + this.status)
       // setTimeout(this.cambiartoggle, 400);
       console.log(this.status);
+      this.presentAlert();
       
     }
 
@@ -333,6 +334,25 @@ export class HomePage {
     this.status = false;
     console.log("estoy ejecutando el cambio de toggle " + this.status);
 
+  }
+
+  async presentAlert() {
+    const alert = document.createElement('ion-alert');
+    alert.cssClass = 'my-custom-class';
+    alert.header = 'Confirma';
+    alert.message = '<strong>En este horario no se puede activar la alarma, revise su configuración.</strong>!';
+    alert.buttons = [
+     {
+        text: 'Aceptar',
+        handler: () => {
+          console.log('Confirm Okay')
+          this.status = false;
+        }
+      }
+    ];
+  
+    document.body.appendChild(alert);
+    return alert.present();
   }
 
 

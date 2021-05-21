@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
 
   cambiartoggle(){
     this.status= true;
-    console.log(this.status);
+    console.log("estoy llamando a cambiar toggle" + this.status);
 
   }
 
@@ -59,6 +59,24 @@ export class LoginPage implements OnInit {
     this.cambiartoggle();
   }
 
+  async presentAlert() {
+    const alert = document.createElement('ion-alert');
+    alert.cssClass = 'my-custom-class';
+    alert.header = 'Confirm!';
+    alert.message = 'Message <strong>no se peude activar a estas horas</strong>!!!';
+    alert.buttons = [
+     {
+        text: 'Okay',
+        handler: () => {
+          console.log('Confirm Okay')
+          this.cambiartoggle();
+        }
+      }
+    ];
+  
+    document.body.appendChild(alert);
+    return alert.present();
+  }
   
   
 
