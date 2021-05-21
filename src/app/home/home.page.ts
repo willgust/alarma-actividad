@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators   } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 
 import { Gyroscope, GyroscopeOrientation, GyroscopeOptions } from '@ionic-native/gyroscope/ngx';
@@ -19,6 +19,8 @@ import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 
 
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -26,21 +28,21 @@ import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 })
 export class HomePage {
 
-  public xOrient:any;
-  public yOrient:any;
-  public zOrient:any;
-  public timestamp:any
-  public accX:any=0;
-  public accY:any=0;
-  public accZ:any=0;
+  public xOrient: any;
+  public yOrient: any;
+  public zOrient: any;
+  public timestamp: any
+  public accX: any = 0;
+  public accY: any = 0;
+  public accZ: any = 0;
 
-  public oriX:any=0;
-  public oriY:any=0;
-  public oriZ:any=0;
+  public oriX: any = 0;
+  public oriY: any = 0;
+  public oriZ: any = 0;
 
   public controler: any;
-  public count: any=0;
-  public reset: any=0;
+  public count: any = 0;
+  public reset: any = 0;
 
   audio: any
 
@@ -60,272 +62,197 @@ export class HomePage {
 
   private subscription: any;
 
-  text: string ="iniciar";
+  text: string = "iniciar";
   changebuttom: boolean = true;
 
-  usuario = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(4)]],
-    email: ['', [Validators.required, Validators.email]],
-    tiempoActivacion: ['', [Validators.required, Validators.minLength(3)]],
-    horaInicio: ['', Validators.required],
-    horaFin: ['', Validators.required],
-  });
 
   private horaActual = new Date();
 
-  status=false;
+  status: boolean = false;
+  disable = false;
 
-  constructor(public foregroundService: ForegroundService , private backgroundMode: BackgroundMode , private _toastContrl: ToastController , private fb: FormBuilder,private gyroscope: Gyroscope,private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
+  constructor(public foregroundService: ForegroundService, private backgroundMode: BackgroundMode, private _toastContrl: ToastController, private fb: FormBuilder, private gyroscope: Gyroscope, private deviceMotion: DeviceMotion, private emailComposer: EmailComposer, private localNotifications: LocalNotifications) {
 
-    // console.log("hora actual " + this.horaActual);
-    // this.obtenerLocalStorage();
-    // this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
-    // console.log("n1 de count total " + this.tiempoActivacionCount);
-    // this.tiempoCorreo = (this.tiempoActivacionCount+ 900);
-
-    // this.horaInicioModificada = this.horaInicio.substr(11,5);
-    // this.horaFinModificada = this.horaFin.substr(11,5);
-    // this.tiempoAhora = moment().format();;
-    // this.horaActualModificada = this.tiempoAhora.substr(11,5);
-    // console.log("hora de inicio modificada " + this.horaInicioModificada);
-    // console.log("hora de fin modificada " + this.horaFinModificada);
-    // console.log("mostrando tiempo de moment actual " + this.horaActualModificada);
-
-    // var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
-    // console.log(limitTime);
-    // console.log("inicio " + this.horaInicio);
-    // console.log("fin " + this.horaFin);
-    // console.log("actual " + this.horaActual);
-   
   }
-  ionViewWillEnter (){
+  ionViewWillEnter() {
     this.startService();
     this.backgroundMode.enable();
     this.obtenerLocalStorage();
-    
-    
+
+
   }
   ngOnInit() {
-    
+
 
     this.audio = new Audio();
     this.audio.src = '../../assets/sound/002663916_prev.mp3';
     this.audio.load();
-    
 
-    
-
-    // console.log("hora actual " + this.horaActual);
-    // // this.obtenerLocalStorage();
-    // console.log("tiempo de activacion " + this.tiempoActivacion);
-    // this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
-    // console.log("n1 de count total " + this.tiempoActivacionCount);
-    // this.tiempoCorreo = (this.tiempoActivacionCount+ 900);
-
-    // this.horaInicioModificada = this.horaInicio.substr(11,5);
-    // this.horaFinModificada = this.horaFin.substr(11,5);
-    // this.tiempoAhora = moment().format();;
-    // this.horaActualModificada = this.tiempoAhora.substr(11,5);
-    // console.log("hora de inicio modificada " + this.horaInicioModificada);
-    // console.log("hora de fin modificada " + this.horaFinModificada);
-    // console.log("mostrando tiempo de moment actual " + this.horaActualModificada);
-
-    // console.log("tiempo de activacion " + this.tiempoActivacion);
-    // console.log("tiempo de contador xa activar " + this.tiempoActivacionCount);
-
-    // var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
-    // console.log(limitTime);
-    // console.log("inicio " + this.horaInicio);
-    // console.log("fin " + this.horaFin);
-    // console.log("actual " + this.horaActual);
-    
-    
   }
 
   startService() {
     // Notification importance is optional, the default is 1 - Low (no sound or vibration)
     this.foregroundService.start('Guard Alarm', 'Background Service');
-   }
+  }
 
   stopService() {
     // Disable the foreground service
     this.foregroundService.stop();
-   }
-
-
-  gyrascope(){
-
-    let options: GyroscopeOptions = {
-      frequency: 1000
-    };
-   
-    this.gyroscope.getCurrent(options)
-     .then((orientation: GyroscopeOrientation) => {
-        console.log(orientation.x, orientation.y, orientation.z, orientation.timestamp);
-        this.xOrient=orientation.x;
-        this.yOrient=orientation.y;
-        this.zOrient=orientation.z;
-        this.timestamp=orientation.timestamp;
-
-      })
-     .catch()
-   
-   
-    this.gyroscope.watch()
-      .subscribe((orientation: GyroscopeOrientation) => {
-         console.log(orientation.x, orientation.y, orientation.z, orientation.timestamp);
-         this.xOrient=orientation.x;
-        this.yOrient=orientation.y;
-        this.zOrient=orientation.z;
-        this.timestamp=orientation.timestamp;
-      });
   }
 
-  Accelerometer(){
 
-    
+  Accelerometer() {
+
+
     var options = { frequency: 200 };
-    this.tiempoActivacionCount = (this.tiempoActivacion*60*5);
-    this.tiempoCorreo = (this.tiempoActivacionCount+ 900);
-    this.horaInicioModificada = this.horaInicio.substr(11,5);
-    this.horaFinModificada = this.horaFin.substr(11,5);
+    this.tiempoActivacionCount = (this.tiempoActivacion * 60 * 5);
+    this.tiempoCorreo = (this.tiempoActivacionCount + 900);
+    this.horaInicioModificada = this.horaInicio.substr(11, 5);
+    this.horaFinModificada = this.horaFin.substr(11, 5);
     this.tiempoAhora = moment().format();;
-    this.horaActualModificada = this.tiempoAhora.substr(11,5);
-    var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
+    this.horaActualModificada = this.tiempoAhora.substr(11, 5);
+    var limitTime = this.DentroHorasLimite(this.horaInicioModificada, this.horaFinModificada, this.horaActualModificada);
 
     this.deviceMotion.getCurrentAcceleration().then(
       (acceleration: DeviceMotionAccelerationData) =>
-       console.log(acceleration),
-       
-       
-   
-    //  (error: any) => console.log(error)
- 
+        console.log(acceleration),
+
+      //  (error: any) => console.log(error)
+
     );
-    
-    if(limitTime == false){
+
+    if (limitTime == false) {
       this.TimeToast("guard alarm ha sido activado");
       // Watch device acceleration
       this.subscription = this.deviceMotion.watchAcceleration(options).subscribe((acceleration: DeviceMotionAccelerationData) => {
-      console.log(acceleration);
-      this.accX=acceleration.x;
-      this.accY=acceleration.y;
-      this.accZ=acceleration.z;
-      // this.horaActual = new Date();
-      // var limitTime = this.DentroHorasLimite(this.horaInicio,this.horaFin,this.horaActual);
-      // console.log(limitTime);
-      this.tiempoAhora = moment().format();;
-      this.horaActualModificada = this.tiempoAhora.substr(11,5);
-      var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
+        console.log(acceleration);
+        this.accX = acceleration.x;
+        this.accY = acceleration.y;
+        this.accZ = acceleration.z;
+        // this.horaActual = new Date();
+        // var limitTime = this.DentroHorasLimite(this.horaInicio,this.horaFin,this.horaActual);
+        // console.log(limitTime);
+        this.tiempoAhora = moment().format();;
+        this.horaActualModificada = this.tiempoAhora.substr(11, 5);
+        var limitTime = this.DentroHorasLimite(this.horaInicioModificada, this.horaFinModificada, this.horaActualModificada);
 
-      if(limitTime == false){
-        //el contador y todos los demas condicionales empiezan a funcionar
-        if(this. accX == this.oriX && this. accY == this.oriY && this. accZ == this.oriZ){
-          this.controler = "algo";
-          console.log(this.count);
-  
-          this.count = this.count +1;
-  
-          //aqui creamos un if donde una vez en count tenga el valor q queremos dispare la alarma. 
-          if(this.tiempoActivacionCount == this.count ){
-            //disparamos la alarma
-            this.playAudio();
-          }
-                      
-          //cuando el tiempo extra se haya cumplido mandamos el correo y cortamos la alarma y el programa
-          if(this.tiempoCorreo == this.count){
+        if (limitTime == false) {
+          //el contador y todos los demas condicionales empiezan a funcionar
+
+          if (this.accX == this.oriX && this.accY == this.oriY && this.accZ == this.oriZ) {
+            this.controler = "algo";
+            console.log(this.count);
+
+            this.count = this.count + 1;
+
+            //aqui creamos un if donde una vez en count tenga el valor q queremos dispare la alarma. 
+            if (this.tiempoActivacionCount == this.count) {
+              //disparamos la alarma
+              this.playAudio();
+            }
+
+            //cuando el tiempo extra se haya cumplido mandamos el correo y cortamos la alarma y el programa
+            if (this.tiempoCorreo == this.count) {
               this.stopAudio();
               //mandamos el correo
               this.sendMailJS();
               this.stopAccelerometer();
-              
-          }
-          
-        //al moverse el movil reseteamos el contador y si la alarma estuviera sonado la cortamos  
-        }else{
-  
-          this.oriX = this.accX;
-          this.oriY = this.accY;
-          this.oriZ = this.accZ;
-          console.log(this.reset);
-  
-          this.reset = this.reset +1;
-          this.count = 0;
-          this.stopAudio();
 
-        }
-          
-      }else{
-        //metemos un aviso de que en estas horas la aplicaciones esta configurada xa no funcionar y ponemos el count a 0
-           this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
+            }
+
+            //al moverse el movil reseteamos el contador y si la alarma estuviera sonado la cortamos  
+          } else {
+
+            this.oriX = this.accX;
+            this.oriY = this.accY;
+            this.oriZ = this.accZ;
+            console.log(this.reset);
+
+            this.reset = this.reset + 1;
+            this.count = 0;
+            this.stopAudio();
+
+          }
+
+        } else {
+          //metemos un aviso de que en estas horas la aplicaciones esta configurada xa no funcionar y ponemos el count a 0
+          this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
           //  this.stopAccelerometer();
           this.count = 0;
-      }
-    
-    });
-    }else{
+
+        }
+
+      });
+    } else {
       this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
-    }
+      // this.cambiartoggle();
+      console.log("estoy mirando el valor de status antes de llamar a la funcion " + this.status)
+      // setTimeout(this.cambiartoggle, 400);
+      console.log(this.status);
       
+    }
+
   }
 
-  stopAccelerometer(){
+
+
+  stopAccelerometer() {
     this.subscription.unsubscribe();
     this.count = 0;
     this.TimeToast("guard alarm se ha detenido");
   }
-  
-  change_Buttom(){
+
+  change_Buttom() {
     this.changebuttom = !this.changebuttom;
-    if(this.changebuttom == true){
-      this.text="Iniciar";
-    }else{
-      this.text="Parar";
+    if (this.changebuttom == true) {
+      this.text = "Iniciar";
+    } else {
+      this.text = "Parar";
     }
   }
 
-  obtenerLocalStorage(){
+  obtenerLocalStorage() {
     let nombre = localStorage.getItem("nombre");
     let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
     // let ejemplo = localStorage.getItem("datosApp");
 
     console.log("objeto recuperando " + ejemplo[1].nombre)
 
-    
+
     this.nombre = ejemplo[1].nombre;
     this.email = ejemplo[1].email;
     this.tiempoActivacion = ejemplo[1].tiempoActivacion;
     this.horaInicio = ejemplo[1].horaInicio;
     this.horaFin = ejemplo[1].horaFin;
-    
-    console.log("nombre de susario " + this.nombre);
-    console.log("email de usuario " + this.email);
-    console.log("tiempo en min " + this.tiempoActivacion);
-    console.log("hora de inicio " + this.horaInicio);
-    console.log("hora de fin " + this.horaFin);
+
+    // console.log("nombre de susario " + this.nombre);
+    // console.log("email de usuario " + this.email);
+    // console.log("tiempo en min " + this.tiempoActivacion);
+    // console.log("hora de inicio " + this.horaInicio);
+    // console.log("hora de fin " + this.horaFin);
   }
 
   //da false si no esta dentro de las horas y true en caso de si estarlo
-  DentroHorasLimite (startTimeModificado ,  endTimeModificado ,  serverTimeModificado){
-    let  start  =  moment ( startTimeModificado ,  "H: mm" );
-    let  end  =  moment ( endTimeModificado ,  "H: mm" );
-    let  server  =  moment ( serverTimeModificado ,  "H: mm" );
+  DentroHorasLimite(startTimeModificado, endTimeModificado, serverTimeModificado) {
+    let start = moment(startTimeModificado, "H: mm");
+    let end = moment(endTimeModificado, "H: mm");
+    let server = moment(serverTimeModificado, "H: mm");
     if (end < start) {
-      return server >= start && server<= moment('23:59:59', "h:mm:ss") || server>= moment('0:00:00', "h:mm:ss") && server < end;
-  }
-  return server>= start && server< end
+      return server >= start && server <= moment('23:59:59', "h:mm:ss") || server >= moment('0:00:00', "h:mm:ss") && server < end;
+    }
+    return server >= start && server < end
 
-  // DentroHorasLimite('22:30', '3:00', '23:50') //return true
-  // DentroHorasLimite('22:30', '3:00', '1:50') //return true
-  // DentroHorasLimite('22:30', '3:00', '4:50') //return false
-  }
-
-  playAudio() { 
-    this.audio.play(); 
-    this.audio.loop = true; 
+    // DentroHorasLimite('22:30', '3:00', '23:50') //return true
+    // DentroHorasLimite('22:30', '3:00', '1:50') //return true
+    // DentroHorasLimite('22:30', '3:00', '4:50') //return false
   }
 
-  stopAudio() { 
+  playAudio() {
+    this.audio.play();
+    this.audio.loop = true;
+  }
+
+  stopAudio() {
     this.audio.pause();
   }
 
@@ -333,44 +260,81 @@ export class HomePage {
     const toast = await this._toastContrl.create({
       message: string,
       duration: 2000,
-      position : 'bottom'
+      position: 'bottom'
     });
     toast.present();
   }
 
-  sendMailJS(){
+  sendMailJS() {
     var tempParams = {
-      from_name : "Guard Alarm",
-      to_name : this.nombre,
-      message : "ha pasado el tiempo de actividad marcado de " + this.tiempoActivacion + " minutos" ,
-      user_email : this.email
+      from_name: "Guard Alarm",
+      to_name: this.nombre,
+      message: "ha pasado el tiempo de actividad marcado de " + this.tiempoActivacion + " minutos",
+      user_email: this.email
     };
-    emailjs.send('service_kcju8h4', 'template_9xzhqh7', tempParams , 'user_uQL2GaHT3dQd2acMvxJBB' )
-    .then(function(res) {
-      console.log("exito", res.status);
-    })
+    emailjs.send('service_kcju8h4', 'template_9xzhqh7', tempParams, 'user_uQL2GaHT3dQd2acMvxJBB')
+      .then(function (res) {
+        console.log("exito", res.status);
+      })
   }
 
-  onChange(){
-    if(this.status){
+
+  onChange() {
+    if (this.status) {
       this.buttonOn();
     }
-    else{
+    else {
       this.buttonOff()
     }
   }
-  
-  buttonOn() { 
+
+  // onChange(){
+
+  //   this.horaInicioModificada = this.horaInicio.substr(11,5);
+  //   this.horaFinModificada = this.horaFin.substr(11,5);
+  //   this.tiempoAhora = moment().format();;
+  //   this.horaActualModificada = this.tiempoAhora.substr(11,5);
+  //   var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
+  //   console.log("estoy entrando en el onchange")
+  //   console.log("la comparacion de timepo es " + limitTime);
+  //   if(limitTime == false){
+
+  //     if(this.status){
+  //       this.buttonOn();
+  //       console.log("estoy dentro del if")
+  //     }
+  //     else{
+  //       this.buttonOff()
+  //       console.log("estoy dentro del if")
+  //     }
+  //   }else{
+  //     this.status= true;
+  //     console.log("estoy dentro del else")
+  //     console.log(this.status);
+  //     alert("no se puede activar la alarma debido al horario elegido, revise su cuenta")
+  //   }
+  // }
+
+  buttonOn() {
     // encienda la llamada
     // alert("lo acabas de encender");
     this.Accelerometer();
-}
+  }
 
   buttonOff() {
     // apaga la llamada
-  //  alert("lo acabas de apagar");
-   this.stopAccelerometer();
-}
+    //  alert("lo acabas de apagar");
+    this.stopAccelerometer();
+  }
 
-  
+  cambiartoggle() {
+
+    console.log("estoy ejecutando el cambio de toggle " + this.status);
+    this.status = false;
+    console.log("estoy ejecutando el cambio de toggle " + this.status);
+
+  }
+
+
+
 }

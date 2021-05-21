@@ -10,14 +10,15 @@ import * as moment from 'moment';
 export class LoginPage implements OnInit {
 
   status=false;
-  
+  disable=true;
+  condition =55;
+  value ="Sausage"
 
   constructor() { }
 
   ngOnInit() {
     
     
-
     
   }
 
@@ -32,13 +33,33 @@ export class LoginPage implements OnInit {
   
   buttonOn() { 
       // this function is called;
-      alert("lo acabas de encender");
+      console.log("lo acabas de encender");
+      // this.funcionIntermedia();
+      // console.log("en el on " + this.status);
+      // this.cambiartoggle();
+      // console.log("en el on 2 " + this.status);
+
+      
   }
   
   buttonOff() {
      // how to call this function when toggle button gets off?
-     alert("lo acabas de apagar");
+     console.log("lo acabas de apagar");
+     console.log("en el off " + this.status);
   }
+
+  cambiartoggle(){
+    this.status= true;
+    console.log(this.status);
+
+  }
+
+  funcionIntermedia(){
+    console.log("intento apargar el boton");
+    this.cambiartoggle();
+  }
+
+  
   
 
 }

@@ -96,28 +96,6 @@ export class FormPage implements OnInit {
     // console.log(this.infoUsuario);
   }
 
-  // transformData(date){
-    
-  // }
-  
-  // guardarLocalStorage(){
-    
-  //   localStorage.clear();
-  //   let nombre: string = "carlos";
-  //   // let ejemplo = [
-  //   //   {
-  //   //     "nombre": "carlos",
-  //   //     "email" : "algo@gmail.com",
-  //   //     "tiempoActivacion" : 123,
-  //   //     "horaInicio" : "19:30",
-  //   //     "horaFin" : "20:00"
-  //   //   }];
-
-  //   let ejemplo = this.datosJSONEjemplo;
-
-  //     localStorage.setItem("nombre", nombre);
-  //     localStorage.setItem("persona",JSON.stringify(this.datosJSONEjemplo));
-  // }
 
 
   obtenerLocalStorage(){
@@ -134,11 +112,11 @@ export class FormPage implements OnInit {
     this.horaInicio = ejemplo[1].horaInicio;
     this.horaFin = ejemplo[1].horaFin;
     
-    console.log("nombre de susario " + this.nombre);
-    console.log("email de usuario " + this.email);
-    console.log("tiempo en min " + this.tiempoActivacion);
-    console.log("hora de inicio " + this.horaInicio);
-    console.log("hora de fin " + this.horaFin);
+    // console.log("nombre de susario " + this.nombre);
+    // console.log("email de usuario " + this.email);
+    // console.log("tiempo en min " + this.tiempoActivacion);
+    // console.log("hora de inicio " + this.horaInicio);
+    // console.log("hora de fin " + this.horaFin);
   }
 
   navegateHome(){

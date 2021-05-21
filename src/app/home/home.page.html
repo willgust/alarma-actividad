@@ -1,9 +1,4 @@
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-<script type="text/javascript">
-(function() {
-emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
-})();
-</script> -->
+
 
 <ion-header [translucent]="true" >
   <ion-toolbar color="secondary">
@@ -15,25 +10,6 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
 
 <ion-content [fullscreen]="true" force-overscroll="false">
   <gl-background-video src="assets/video/fondo.mp4" mute="false"></gl-background-video>
-  <!-- <ion-item> 
-    <ion-label>X orientation</ion-label>
-  <ion-input type="text" [(ngModel)]="xOrient"></ion-input>
-</ion-item>
-<ion-item> 
-    <ion-label>Y orientation</ion-label>
-    <ion-input type="text" [(ngModel)]="yOrient"></ion-input>
-  </ion-item>
-  <ion-item> 
-      <ion-label>Z orientation</ion-label>
-      <ion-input type="text" [(ngModel)]="zOrient"></ion-input>
-    </ion-item>
-    <ion-item> 
-        <ion-label>Time Stamp</ion-label>
-        <ion-input type="text" [(ngModel)]="timestamp"></ion-input>
-      </ion-item>
-
-      <button ion-button (click)="gyrascope()" full>click</button> -->
-
       <!-- <ion-item> 
           <ion-label>Acceleration X</ion-label>
           <ion-input type="text" [(ngModel)]="accX"></ion-input>
@@ -45,9 +21,9 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
           <ion-item> 
               <ion-label>Acceleration Z</ion-label>
               <ion-input type="text" [(ngModel)]="accZ"></ion-input>
-          </ion-item>
+          </ion-item> -->
 
-          <ion-item> 
+          <!-- <ion-item> 
             <ion-label>Count</ion-label>
             <ion-input type="text" [(ngModel)]="count"></ion-input>
         </ion-item>
@@ -84,7 +60,8 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
 
         <div class="page-centered-elemnet">
           <div class="content"> 
-            <ion-item> 
+            
+            <!-- <ion-item> 
               <ion-label>Count</ion-label>
               <ion-input type="text" [(ngModel)]="count"></ion-input>
             </ion-item>
@@ -103,14 +80,14 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
             <ion-item> 
               <ion-label>tiempocorreo </ion-label>
               <ion-input type="text" [(ngModel)]="tiempoCorreo"></ion-input>
-            </ion-item> 
-            <h4 style="color:aliceblue">Activity Guard se activara {{tiempoActivacion}} min despues de no tener actividad una vez activada la app</h4>
+            </ion-item>  -->
+            <h4 style="color:aliceblue">Activity Guard se activará {{tiempoActivacion}} min despues de no usar el móvil una vez activada </h4>
             <div class="buttons-container">
               <ion-button fill="clear" color="ligth" size="large">
-                <ion-toggle [(ngModel)]="status" color="secondary" class="width-large" (ionChange)="onChange()"></ion-toggle>
+                <ion-toggle  [(ngModel)]="status" checked="status" color="secondary" class="width-large" (ionChange)="onChange()" ></ion-toggle>
               </ion-button>
  
-              <ion-button expad="block" (click)="Accelerometer()">{{text}} app</ion-button>
+              <!-- <ion-button expad="block" (click)="Accelerometer()">{{text}} app</ion-button>
               <ion-button expad="block" (click)="stopAccelerometer()">Parar app</ion-button>
 
               <ion-button expad="block" (click)="playAudio()">sonido</ion-button>
@@ -119,25 +96,14 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
               <ion-button expad="block" (click)="stopAccelerometer()" routerLink="/cuenta">cuenta</ion-button>
 
               <ion-button expad="block" (click)="sendMailJS()">mandar correo</ion-button>
+              <ion-button expad="block" (click)="cambiartoggle()">cambiar ion-toggle</ion-button> -->
             </div>
           </div>
         </div>
       
 </ion-content>
-  <!-- <ion-card-content>
-    <div class="page-centered-elemnet">
-      <div class="content"> 
-        <h4>guard alarm se activara 100 min despues de no tener actividad una vez activada la app</h4>
-        <div class="buttons-container">
-          <ion-button fill="clear" color="ligth" size="large">
-            <ion-toggle color="secondary" class="width-large" (ionChange)="onChange()"></ion-toggle>
-          </ion-button>
-        </div>
-      </div>
-    </div>
-  </ion-card-content>  -->
-
-  <ion-footer class="ion-no-border" >
+ 
+<ion-footer class="ion-no-border" >
     <ion-toolbar >
       <ion-tabs >
         <ion-tab-bar slot="bottom" color="secondary">
@@ -152,4 +118,4 @@ emailjs.init("user_uQL2GaHT3dQd2acMvxJBB");
         </ion-tab-bar>
       </ion-tabs>
     </ion-toolbar>
-  </ion-footer>
+</ion-footer>

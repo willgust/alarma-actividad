@@ -7,7 +7,7 @@
 <ion-content force-overscroll="false">
   
 
-  <div class="page-centered-elemnet">
+  <!-- <div class="page-centered-elemnet">
     <div class="content"> 
       <h4>guard alarm se activara 100 min despues de no tener actividad una vez activada la app</h4>
       <div class="buttons-container">
@@ -16,9 +16,37 @@
         </ion-button>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <!-- <ion-toggle  [(ngModel)]="disable" checked={{disable}} (click)="cambiartoggle()"></ion-toggle> -->
+  <ion-toggle disabled="true"></ion-toggle>
+  <ion-toggle  [(ngModel)]="status"  color="secondary" class="width-large" (ionChange)="onChange()" ></ion-toggle>
+
+  <ion-button expad="block" (click)="cambiartoggle()">cambiar ion-toggle</ion-button>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Pepperoni</ion-label>
+      <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Sausage</ion-label>
+      <ion-toggle [(ngModel)]="sausage" disabled="true"></ion-toggle>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Mushrooms</ion-label>
+      <ion-toggle [(ngModel)]="mushrooms"></ion-toggle>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
+<ion-item>
+  <ion-label>Sausage</ion-label>
+  <ion-toggle [(ngModel)]="sausage" disabled="true"></ion-toggle>
+</ion-item>
+<ion-toggle  [(ngModel)]="status" checked="status" color="secondary" class="width-large" (ionChange)="onChange()" ></ion-toggle>
 <!-- <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button routerLink="/home">

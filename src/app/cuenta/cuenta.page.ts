@@ -21,17 +21,6 @@ export class CuentaPage implements OnInit {
 
   constructor() { 
 
-    // this.obtenerLocalStorage();
-    // this.horaInicioModificada = this.horaInicio.substr(11,5);
-    // this.horaFinModificada = this.horaFin.substr(11,5);
-
-    // // let inicio = moment(this.horaInicio, "H:mm");
-    // // console.log("que dato tengo aqui" + inicio);
-    // // console.log("dato de tiempo original " + this.horaInicio);
-    // // console.log(typeof this.horaInicio);
-
-    // // console.log("cogiendo cadena " + this.horaInicio.substr(11,5))
-    
   }
 
   ngOnInit() {

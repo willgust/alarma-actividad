@@ -1,10 +1,11 @@
 <ion-header>
   <ion-toolbar color="secondary">
-    <ion-title class="custom-Text">form</ion-title>
+    <ion-title class="custom-Text">Formulario</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  
   <form [formGroup]="usuario" (ngSubmit)="guardarDatos()">
     <ion-item>
       <ion-label>Nombre:</ion-label>
@@ -25,12 +26,12 @@
     <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.required && (usuario.touched || usuario.dirty)">* El tiempo de activacion es obligatorio </ion-label>
     <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.minlength && (usuario.touched || usuario.dirty)">* El nombre tiene que tener al menos 4 caracteres.</ion-label>
     <ion-item>
-      <ion-label>Hora Inicio</ion-label>
+      <ion-label>Hora de ir a dormir:</ion-label>
       <ion-datetime formControlName="horaInicio" displayFormat="HH:mm"></ion-datetime>
     </ion-item>
     <ion-label color="danger" *ngIf="usuario.controls.horaInicio.errors?.required && (usuario.touched || usuario.dirty)">* La hora de inicio es obligatoria </ion-label>
     <ion-item>
-      <ion-label>Hora Fin</ion-label>
+      <ion-label>Hora de despertar:</ion-label>
       <ion-datetime formControlName="horaFin" displayFormat="HH:mm"></ion-datetime>
     </ion-item>
     <ion-label color="danger" *ngIf="usuario.controls.horaFin.errors?.required && (usuario.touched || usuario.dirty)">* La hora de finalizacion es obligatoria </ion-label>
@@ -38,21 +39,7 @@
     <p class="ion-text-center">
       <ion-button type="submit" [disabled]="!usuario.valid" routerLink="/home" >Guardar</ion-button>
     </p>
-    
-    <!-- <ion-card *ngFor = " let item of datosJSON">
-      <ion-item>inicio {{item.horaInicio}}</ion-item>
-      <ion-item>fin {{item.horaFin}}</ion-item>
-    </ion-card> -->
-
-    <!-- <ion-card >
-      <ion-item>inicio {{datosJSONEjemplo[0].horaInicio}}</ion-item>
-      <ion-item>fin {{datosJSONEjemplo[0].horaFin}}</ion-item>
-    </ion-card> -->
-
-    
-    
+  
  </form>
- 
- <ion-button type="submit"  (click)="navegateHome()" >navegando hacia home</ion-button>
  
 </ion-content>
