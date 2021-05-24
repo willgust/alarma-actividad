@@ -29,7 +29,9 @@ export class CuentaPage implements OnInit {
     this.horaFinModificada = this.horaFin.substr(11,5);
   }
 
-
+  /**
+   * descarga el local storage y lo mete en una variables
+   */
   obtenerLocalStorage(){
     let nombre = localStorage.getItem("nombre");
     let ejemplo = JSON.parse(localStorage.getItem("datosApp"));

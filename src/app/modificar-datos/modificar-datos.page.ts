@@ -34,6 +34,9 @@ export class ModificarDatosPage implements OnInit {
     this.obtenerLocalStorage();
   }
 
+  /**
+   * guarda los datos en el local storage
+   */
   guardarDatos(){
 
     this.datosJSON = [{}];
@@ -56,6 +59,9 @@ export class ModificarDatosPage implements OnInit {
 
   }
 
+  /**
+   * descarga el local storage y lo mete en una variables
+   */
   obtenerLocalStorage(){
     let nombre = localStorage.getItem("nombre");
     let ejemplo = JSON.parse(localStorage.getItem("datosApp"));

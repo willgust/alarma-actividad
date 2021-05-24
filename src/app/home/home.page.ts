@@ -100,7 +100,9 @@ export class HomePage {
     this.foregroundService.stop();
   }
 
-
+  /**
+   * Esta función comprobara si estamos dentro de la hora limitTime(donde puede ejecutarse el resto) y se subcribira a deviceMOtion obteniendo lecturas del acelerometro y tendra unos condicionantes para el resto de la logica de la funcion
+   */
   Accelerometer() {
 
 
@@ -196,22 +198,27 @@ export class HomePage {
   }
 
 
-
+  /**
+   * se desuscribe del servicio
+   */
   stopAccelerometer() {
     this.subscription.unsubscribe();
     this.count = 0;
     this.TimeToast("guard alarm se ha detenido");
   }
 
-  change_Buttom() {
-    this.changebuttom = !this.changebuttom;
-    if (this.changebuttom == true) {
-      this.text = "Iniciar";
-    } else {
-      this.text = "Parar";
-    }
-  }
+  // change_Buttom() {
+  //   this.changebuttom = !this.changebuttom;
+  //   if (this.changebuttom == true) {
+  //     this.text = "Iniciar";
+  //   } else {
+  //     this.text = "Parar";
+  //   }
+  // }
 
+  /**
+   * descarga el local storage y lo mete en una variables
+   */
   obtenerLocalStorage() {
     let nombre = localStorage.getItem("nombre");
     let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
@@ -233,7 +240,13 @@ export class HomePage {
     // console.log("hora de fin " + this.horaFin);
   }
 
-  //da false si no esta dentro de las horas y true en caso de si estarlo
+  /**
+   * detecta si estamos dentro de las horas de exclusion o no
+   * @param startTimeModificado hora de ir a dormir
+   * @param endTimeModificado hora de despertarse
+   * @param serverTimeModificado hora actual
+   * @returns da false si no esta dentro de las horas y true en caso de si estarlo
+   */
   DentroHorasLimite(startTimeModificado, endTimeModificado, serverTimeModificado) {
     let start = moment(startTimeModificado, "H: mm");
     let end = moment(endTimeModificado, "H: mm");
@@ -248,15 +261,25 @@ export class HomePage {
     // DentroHorasLimite('22:30', '3:00', '4:50') //return false
   }
 
+  /**
+   * activa el sonido
+   */
   playAudio() {
     this.audio.play();
     this.audio.loop = true;
   }
 
+  /**
+   * detiene el sonido
+   */
   stopAudio() {
     this.audio.pause();
   }
 
+  /**
+   * 
+   * @param string texto del aviso
+   */
   async TimeToast(string) {
     const toast = await this._toastContrl.create({
       message: string,
@@ -266,9 +289,12 @@ export class HomePage {
     toast.present();
   }
 
+  /**
+   * funcion para el envio del correo
+   */
   sendMailJS() {
     var tempParams = {
-      from_name: "Guard Alarm",
+      from_name: "Activity Guard",
       to_name: this.nombre,
       message: "ha pasado el tiempo de actividad marcado de " + this.tiempoActivacion + " minutos",
       user_email: this.email
@@ -279,7 +305,9 @@ export class HomePage {
       })
   }
 
-
+  /**
+   * funcion para activar el toggle en funcion de su estado
+   */
   onChange() {
     if (this.status) {
       this.buttonOn();
@@ -316,18 +344,27 @@ export class HomePage {
   //   }
   // }
 
+  /**
+   * cuando activamos el boton desde on
+   */
   buttonOn() {
     // encienda la llamada
     // alert("lo acabas de encender");
     this.Accelerometer();
   }
 
+  /**
+   * cuando activamos el boton desde off
+   */
   buttonOff() {
     // apaga la llamada
     //  alert("lo acabas de apagar");
     this.stopAccelerometer();
   }
 
+  /**
+   * cambia el estado el toggle 
+   */
   cambiartoggle() {
 
     console.log("estoy ejecutando el cambio de toggle " + this.status);
@@ -336,6 +373,10 @@ export class HomePage {
 
   }
 
+  /**
+   * muestra un mensaje de aviso que hay q aceptar y cambia el valor del status
+   * @returns 
+   */
   async presentAlert() {
     const alert = document.createElement('ion-alert');
     alert.cssClass = 'my-custom-class';

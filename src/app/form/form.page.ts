@@ -63,6 +63,9 @@ export class FormPage implements OnInit {
      
   }
 
+  /**
+   * guarda los datos en el local storage
+   */
   guardarDatos(){
 
     this.datosJSON = [{}];
@@ -97,7 +100,9 @@ export class FormPage implements OnInit {
   }
 
 
-
+  /**
+   * descarga el local storage y lo mete en una variables
+   */
   obtenerLocalStorage(){
     let nombre = localStorage.getItem("nombre");
     let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
@@ -119,6 +124,9 @@ export class FormPage implements OnInit {
     // console.log("hora de fin " + this.horaFin);
   }
 
+  /**
+   * nos redirige a la ventana home
+   */
   navegateHome(){
     this.navCtrl.navigateForward('/home');
   }
