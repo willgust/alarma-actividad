@@ -19,6 +19,7 @@ import { ForegroundService } from '@ionic-native/foreground-service/ngx';
 
 
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

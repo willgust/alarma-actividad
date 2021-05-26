@@ -45,12 +45,7 @@ export class CuentaPage implements OnInit {
     this.tiempoActivacion = ejemplo[1].tiempoActivacion;
     this.horaInicio = ejemplo[1].horaInicio;
     this.horaFin = ejemplo[1].horaFin;
-    
-    console.log("nombre de susario " + this.nombre);
-    console.log("email de usuario " + this.email);
-    console.log("tiempo en min " + this.tiempoActivacion);
-    console.log("hora de inicio " + this.horaInicio);
-    console.log("hora de fin " + this.horaFin);
+
   }
 
 

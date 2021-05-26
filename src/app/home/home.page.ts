@@ -21,6 +21,8 @@ import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 
 
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -28,9 +30,7 @@ import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 })
 export class HomePage {
 
-  public xOrient: any;
-  public yOrient: any;
-  public zOrient: any;
+  
   public timestamp: any
   public accX: any = 0;
   public accY: any = 0;
@@ -197,7 +197,6 @@ export class HomePage {
 
   }
 
-
   /**
    * se desuscribe del servicio
    */
@@ -208,15 +207,6 @@ export class HomePage {
     this.status = false;
     
   }
-
-  // change_Buttom() {
-  //   this.changebuttom = !this.changebuttom;
-  //   if (this.changebuttom == true) {
-  //     this.text = "Iniciar";
-  //   } else {
-  //     this.text = "Parar";
-  //   }
-  // }
 
   /**
    * descarga el local storage y lo mete en una variables
@@ -235,11 +225,6 @@ export class HomePage {
     this.horaInicio = ejemplo[1].horaInicio;
     this.horaFin = ejemplo[1].horaFin;
 
-    // console.log("nombre de susario " + this.nombre);
-    // console.log("email de usuario " + this.email);
-    // console.log("tiempo en min " + this.tiempoActivacion);
-    // console.log("hora de inicio " + this.horaInicio);
-    // console.log("hora de fin " + this.horaFin);
   }
 
   /**
@@ -318,33 +303,6 @@ export class HomePage {
       this.buttonOff()
     }
   }
-
-  // onChange(){
-
-  //   this.horaInicioModificada = this.horaInicio.substr(11,5);
-  //   this.horaFinModificada = this.horaFin.substr(11,5);
-  //   this.tiempoAhora = moment().format();;
-  //   this.horaActualModificada = this.tiempoAhora.substr(11,5);
-  //   var limitTime = this.DentroHorasLimite(this.horaInicioModificada,this.horaFinModificada,this.horaActualModificada);
-  //   console.log("estoy entrando en el onchange")
-  //   console.log("la comparacion de timepo es " + limitTime);
-  //   if(limitTime == false){
-
-  //     if(this.status){
-  //       this.buttonOn();
-  //       console.log("estoy dentro del if")
-  //     }
-  //     else{
-  //       this.buttonOff()
-  //       console.log("estoy dentro del if")
-  //     }
-  //   }else{
-  //     this.status= true;
-  //     console.log("estoy dentro del else")
-  //     console.log(this.status);
-  //     alert("no se puede activar la alarma debido al horario elegido, revise su cuenta")
-  //   }
-  // }
 
   /**
    * cuando activamos el boton desde on

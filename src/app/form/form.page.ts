@@ -86,17 +86,9 @@ export class FormPage implements OnInit {
                          "horaInicio" : this.horaInicio,
                          "horaFin" : this.horaFin,                      
                         })
-
-
-    console.log(this.datosJSON);
-    console.log(this.nombre);                   
-    console.log("datos json " + this.datosJSON[1].nombre);
-    
-
     localStorage.clear();
     localStorage.setItem("datosApp",JSON.stringify(this.datosJSON));
-    // this.infoUsuario.push(this.usuario.value);
-    // console.log(this.infoUsuario);
+ 
   }
 
 
@@ -116,12 +108,6 @@ export class FormPage implements OnInit {
     this.tiempoActivacion = ejemplo[1].tiempoActivacion;
     this.horaInicio = ejemplo[1].horaInicio;
     this.horaFin = ejemplo[1].horaFin;
-    
-    // console.log("nombre de susario " + this.nombre);
-    // console.log("email de usuario " + this.email);
-    // console.log("tiempo en min " + this.tiempoActivacion);
-    // console.log("hora de inicio " + this.horaInicio);
-    // console.log("hora de fin " + this.horaFin);
   }
 
   /**

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
+import {ActivityServices} from '../services/activity.service';
 
 @Component({
   selector: 'app-modificar-datos',
@@ -17,8 +18,9 @@ export class ModificarDatosPage implements OnInit {
   horaFin: string;
   
   datosJSON: any[] = [{}];
+ 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _activityServices : ActivityServices) {
    }
 
   usuario = this.fb.group({
@@ -32,6 +34,8 @@ export class ModificarDatosPage implements OnInit {
 
   ngOnInit() {
     this.obtenerLocalStorage();
+    
+   
   }
 
   /**
@@ -71,12 +75,30 @@ export class ModificarDatosPage implements OnInit {
     this.tiempoActivacion = ejemplo[1].tiempoActivacion;
     this.horaInicio = ejemplo[1].horaInicio;
     this.horaFin = ejemplo[1].horaFin;
-    
-    console.log("nombre de susario " + this.nombre);
-    console.log("email de usuario " + this.email);
-    console.log("tiempo en min " + this.tiempoActivacion);
-    console.log("hora de inicio " + this.horaInicio);
-    console.log("hora de fin " + this.horaFin);
+   
   }
+
+  //servicios desde el service
+  // guardadoConServices(){
+  //   this.datosJSON.push({"nombre" : this.usuario.value["nombre"],
+  //                        "email" : this.usuario.value["email"],
+  //                        "tiempoActivacion" : this.usuario.value["tiempoActivacion"],
+  //                        "horaInicio" : this.usuario.value["horaInicio"],
+  //                        "horaFin" : this.usuario.value["horaFin"],                      
+  //                       })
+    
+  //   this._activityServices.miGuardarDatos(this.datosJSON);
+    
+  // }
+
+  // obtenerDatosService(){
+  //   let datos = this._activityServices.miObtenerDatos();
+  //   this.nombre = datos[1].nombre;
+  //   this.email = datos[1].email;
+  //   this.tiempoActivacion = datos[1].tiempoActivacion;
+  //   this.horaInicio = datos[1].horaInicio;
+  //   this.horaFin = datos[1].horaFin;
+  // }
+  
 
 }
