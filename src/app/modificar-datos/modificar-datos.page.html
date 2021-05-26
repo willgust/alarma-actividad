@@ -22,8 +22,8 @@
       <ion-label>Tiempo de activacion(min) :</ion-label>
       <ion-input type='number' formControlName="tiempoActivacion"></ion-input>
     </ion-item>
-    <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.required && (usuario.touched || usuario.dirty)">* El tiempo de activacion es obligatorio </ion-label>
-    <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.minlength && (usuario.touched || usuario.dirty)">* El nombre tiene que tener al menos 4 caracteres.</ion-label>
+    <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.required && (usuario.touched || usuario.dirty)">* El tiempo de activación es obligatorio </ion-label>
+    <ion-label color="danger" *ngIf="usuario.controls.tiempoActivacion.errors?.minlength && (usuario.touched || usuario.dirty)"></ion-label>
     <ion-item>
       <ion-label>Hora de ir a dormir : </ion-label>
       <ion-datetime formControlName="horaInicio" displayFormat="HH:mm"></ion-datetime>
@@ -33,7 +33,7 @@
       <ion-label>Hora de despertar : </ion-label>
       <ion-datetime formControlName="horaFin" displayFormat="HH:mm"></ion-datetime>
     </ion-item>
-    <ion-label color="danger" *ngIf="usuario.controls.horaFin.errors?.required && (usuario.touched || usuario.dirty)">* La hora de finalizacion es obligatoria </ion-label>
+    <ion-label color="danger" *ngIf="usuario.controls.horaFin.errors?.required && (usuario.touched || usuario.dirty)">* La hora de finalización es obligatoria </ion-label>
     
     <p class="ion-text-center">
       

@@ -205,6 +205,8 @@ export class HomePage {
     this.subscription.unsubscribe();
     this.count = 0;
     this.TimeToast("guard alarm se ha detenido");
+    this.status = false;
+    
   }
 
   // change_Buttom() {
