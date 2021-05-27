@@ -18,20 +18,14 @@ import emailjs, { EmailJSResponseStatus } from 'emailjs-com';
 
 
 
-
-
-
-
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
 
-  
-  public timestamp: any
   public accX: any = 0;
   public accY: any = 0;
   public accZ: any = 0;
@@ -40,7 +34,6 @@ export class HomePage {
   public oriY: any = 0;
   public oriZ: any = 0;
 
-  public controler: any;
   public count: any = 0;
   public reset: any = 0;
 
@@ -65,9 +58,6 @@ export class HomePage {
   text: string = "iniciar";
   changebuttom: boolean = true;
 
-
-  private horaActual = new Date();
-
   status: boolean = false;
   disable = false;
 
@@ -79,11 +69,8 @@ export class HomePage {
     this.backgroundMode.enable();
     this.obtenerLocalStorage();
 
-
   }
   ngOnInit() {
-
-
     this.audio = new Audio();
     this.audio.src = '../../assets/sound/002663916_prev.mp3';
     this.audio.load();
@@ -91,7 +78,6 @@ export class HomePage {
   }
 
   startService() {
-    // Notification importance is optional, the default is 1 - Low (no sound or vibration)
     this.foregroundService.start('Guard Alarm', 'Background Service');
   }
 
@@ -105,7 +91,6 @@ export class HomePage {
    */
   Accelerometer() {
 
-
     var options = { frequency: 200 };
     this.tiempoActivacionCount = (this.tiempoActivacion * 60 * 5);
     this.tiempoCorreo = (this.tiempoActivacionCount + 900);
@@ -118,22 +103,17 @@ export class HomePage {
     this.deviceMotion.getCurrentAcceleration().then(
       (acceleration: DeviceMotionAccelerationData) =>
         console.log(acceleration),
-
-      //  (error: any) => console.log(error)
-
     );
 
     if (limitTime == false) {
       this.TimeToast("guard alarm ha sido activado");
-      // Watch device acceleration
+      // viendo device acceleration
       this.subscription = this.deviceMotion.watchAcceleration(options).subscribe((acceleration: DeviceMotionAccelerationData) => {
         console.log(acceleration);
         this.accX = acceleration.x;
         this.accY = acceleration.y;
         this.accZ = acceleration.z;
-        // this.horaActual = new Date();
-        // var limitTime = this.DentroHorasLimite(this.horaInicio,this.horaFin,this.horaActual);
-        // console.log(limitTime);
+
         this.tiempoAhora = moment().format();;
         this.horaActualModificada = this.tiempoAhora.substr(11, 5);
         var limitTime = this.DentroHorasLimite(this.horaInicioModificada, this.horaFinModificada, this.horaActualModificada);
@@ -142,9 +122,6 @@ export class HomePage {
           //el contador y todos los demas condicionales empiezan a funcionar
 
           if (this.accX == this.oriX && this.accY == this.oriY && this.accZ == this.oriZ) {
-            this.controler = "algo";
-            console.log(this.count);
-
             this.count = this.count + 1;
 
             //aqui creamos un if donde una vez en count tenga el valor q queremos dispare la alarma. 
@@ -159,21 +136,18 @@ export class HomePage {
               //mandamos el correo
               this.sendMailJS();
               this.stopAccelerometer();
-
             }
 
             //al moverse el movil reseteamos el contador y si la alarma estuviera sonado la cortamos  
           } else {
-
             this.oriX = this.accX;
             this.oriY = this.accY;
             this.oriZ = this.accZ;
-            console.log(this.reset);
+            //console.log(this.reset);
 
             this.reset = this.reset + 1;
             this.count = 0;
             this.stopAudio();
-
           }
 
         } else {
@@ -181,18 +155,12 @@ export class HomePage {
           this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
           //  this.stopAccelerometer();
           this.count = 0;
-
         }
 
       });
     } else {
-      // this.TimeToast('En este horario no se puede activar la alarma, revise su configuración.');
-      // this.cambiartoggle();
-      console.log("estoy mirando el valor de status antes de llamar a la funcion " + this.status)
-      // setTimeout(this.cambiartoggle, 400);
-      console.log(this.status);
       this.presentAlert();
-      
+
     }
 
   }
@@ -205,25 +173,20 @@ export class HomePage {
     this.count = 0;
     this.TimeToast("guard alarm se ha detenido");
     this.status = false;
-    
+
   }
 
   /**
    * descarga el local storage y lo mete en una variables
    */
   obtenerLocalStorage() {
-    let nombre = localStorage.getItem("nombre");
-    let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
-    // let ejemplo = localStorage.getItem("datosApp");
+    let datos = JSON.parse(localStorage.getItem("datosApp"));
 
-    console.log("objeto recuperando " + ejemplo[1].nombre)
-
-
-    this.nombre = ejemplo[1].nombre;
-    this.email = ejemplo[1].email;
-    this.tiempoActivacion = ejemplo[1].tiempoActivacion;
-    this.horaInicio = ejemplo[1].horaInicio;
-    this.horaFin = ejemplo[1].horaFin;
+    this.nombre = datos[1].nombre;
+    this.email = datos[1].email;
+    this.tiempoActivacion = datos[1].tiempoActivacion;
+    this.horaInicio = datos[1].horaInicio;
+    this.horaFin = datos[1].horaFin;
 
   }
 
@@ -308,8 +271,6 @@ export class HomePage {
    * cuando activamos el boton desde on
    */
   buttonOn() {
-    // encienda la llamada
-    // alert("lo acabas de encender");
     this.Accelerometer();
   }
 
@@ -317,8 +278,6 @@ export class HomePage {
    * cuando activamos el boton desde off
    */
   buttonOff() {
-    // apaga la llamada
-    //  alert("lo acabas de apagar");
     this.stopAccelerometer();
   }
 
@@ -343,7 +302,7 @@ export class HomePage {
     alert.header = 'Confirma';
     alert.message = '<strong>En este horario no se puede activar la alarma, revise su configuración.</strong>!';
     alert.buttons = [
-     {
+      {
         text: 'Aceptar',
         handler: () => {
           console.log('Confirm Okay')
@@ -351,7 +310,7 @@ export class HomePage {
         }
       }
     ];
-  
+
     document.body.appendChild(alert);
     return alert.present();
   }

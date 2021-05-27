@@ -35,7 +35,6 @@ export class ModificarDatosPage implements OnInit {
   ngOnInit() {
     this.obtenerLocalStorage();
     
-   
   }
 
   /**
@@ -43,19 +42,11 @@ export class ModificarDatosPage implements OnInit {
    */
   guardarDatos(){
 
-    this.datosJSON = [{}];
-
-    this.nombre=this.usuario.value["nombre"];
-    this.email=this.usuario.value["email"];
-    this.tiempoActivacion=this.usuario.value["tiempoActivacion"];
-    this.horaInicio=this.usuario.value["horaInicio"];
-    this.horaFin=this.usuario.value["horaFin"];
-    
-    this.datosJSON.push({"nombre" : this.nombre,
-                         "email" : this.email,
-                         "tiempoActivacion" : this.tiempoActivacion,
-                         "horaInicio" : this.horaInicio,
-                         "horaFin" : this.horaFin,                      
+    this.datosJSON.push({"nombre" : this.usuario.value["nombre"],
+                         "email" : this.usuario.value["email"],
+                         "tiempoActivacion" : this.usuario.value["tiempoActivacion"],
+                         "horaInicio" : this.usuario.value["horaInicio"],
+                         "horaFin" : this.usuario.value["horaFin"],                      
                         })
 
     localStorage.clear();
@@ -67,14 +58,13 @@ export class ModificarDatosPage implements OnInit {
    * descarga el local storage y lo mete en una variables
    */
   obtenerLocalStorage(){
-    let nombre = localStorage.getItem("nombre");
-    let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
+    let datos = JSON.parse(localStorage.getItem("datosApp"));
     
-    this.nombre = ejemplo[1].nombre;
-    this.email = ejemplo[1].email;
-    this.tiempoActivacion = ejemplo[1].tiempoActivacion;
-    this.horaInicio = ejemplo[1].horaInicio;
-    this.horaFin = ejemplo[1].horaFin;
+    this.nombre = datos[1].nombre;
+    this.email = datos[1].email;
+    this.tiempoActivacion = datos[1].tiempoActivacion;
+    this.horaInicio = datos[1].horaInicio;
+    this.horaFin = datos[1].horaFin;
    
   }
 

@@ -9,7 +9,7 @@ import * as moment from 'moment';
 })
 export class CuentaPage implements OnInit {
 
-  
+
   nombre: string;
   email: string;
   tiempoActivacion: number;
@@ -19,32 +19,27 @@ export class CuentaPage implements OnInit {
   horaFinModificada: string;
 
 
-  constructor() { 
+  constructor() {
 
   }
 
   ngOnInit() {
     this.obtenerLocalStorage();
-    this.horaInicioModificada = this.horaInicio.substr(11,5);
-    this.horaFinModificada = this.horaFin.substr(11,5);
+    this.horaInicioModificada = this.horaInicio.substr(11, 5);
+    this.horaFinModificada = this.horaFin.substr(11, 5);
   }
 
   /**
    * descarga el local storage y lo mete en una variables
    */
-  obtenerLocalStorage(){
-    let nombre = localStorage.getItem("nombre");
-    let ejemplo = JSON.parse(localStorage.getItem("datosApp"));
-    // let ejemplo = localStorage.getItem("datosApp");
+  obtenerLocalStorage() {
+    let datos = JSON.parse(localStorage.getItem("datosApp"));
 
-    console.log("objeto recuperando " + ejemplo[1].nombre)
-
-    
-    this.nombre = ejemplo[1].nombre;
-    this.email = ejemplo[1].email;
-    this.tiempoActivacion = ejemplo[1].tiempoActivacion;
-    this.horaInicio = ejemplo[1].horaInicio;
-    this.horaFin = ejemplo[1].horaFin;
+    this.nombre = datos[1].nombre;
+    this.email = datos[1].email;
+    this.tiempoActivacion = datos[1].tiempoActivacion;
+    this.horaInicio = datos[1].horaInicio;
+    this.horaFin = datos[1].horaFin;
 
   }
 

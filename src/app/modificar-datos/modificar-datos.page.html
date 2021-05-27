@@ -5,9 +5,9 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="usuario" (ngSubmit)="guardadoConServices()">
+  <form [formGroup]="usuario" (ngSubmit)="guardarDatos()">
     <ion-item>
-      <ion-label>Nombre : {{nombre}}</ion-label>
+      <ion-label>Nombre : </ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
     <ion-label color="danger" *ngIf="usuario.controls.nombre.errors?.required && (usuario.touched || usuario.dirty)">* El nombre es obligatorio </ion-label>
