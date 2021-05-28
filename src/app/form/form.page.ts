@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import {ActivityServices} from '../services/activity.service';
 
 @Component({
   selector: 'app-form',
@@ -20,7 +21,7 @@ export class FormPage implements OnInit {
   datosJSON: any[] = [{}];
 
 
-  constructor(private fb: FormBuilder, private navCtrl: NavController) {
+  constructor(private fb: FormBuilder, private navCtrl: NavController, private _activityServices : ActivityServices) {
 
   }
 
@@ -87,4 +88,26 @@ export class FormPage implements OnInit {
   navegateHome() {
     this.navCtrl.navigateForward('/home');
   }
+
+  //servicios desde el service
+  // guardadoConServices(){
+  //   this.datosJSON.push({"nombre" : this.usuario.value["nombre"],
+  //                        "email" : this.usuario.value["email"],
+  //                        "tiempoActivacion" : this.usuario.value["tiempoActivacion"],
+  //                        "horaInicio" : this.usuario.value["horaInicio"],
+  //                        "horaFin" : this.usuario.value["horaFin"],                      
+  //                       })
+    
+  //   this._activityServices.miGuardarDatos(this.datosJSON);
+    
+  // }
+
+  // obtenerDatosService(){
+  //   let datos = this._activityServices.miObtenerDatos();
+  //   this.nombre = datos[1].nombre;
+  //   this.email = datos[1].email;
+  //   this.tiempoActivacion = datos[1].tiempoActivacion;
+  //   this.horaInicio = datos[1].horaInicio;
+  //   this.horaFin = datos[1].horaFin;
+  // }
 }
